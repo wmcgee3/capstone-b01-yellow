@@ -1,4 +1,4 @@
-﻿# CSCI Capstone B01 Yellow Team
+# CSCI Capstone B01 Yellow Team
 
 How to:
 
@@ -12,7 +12,7 @@ Open your web browser to "localhost:5000"<br />
 
 <b>DO NOT</b> run setup-user.py. This script needs to be heavily modified before it will work with our data structure.
 
-﻿# Contributing
+## Contributing
  
  Create a new branch from "master"<br />
  Title the branch appropriately for what you are working on (ie "product-page-layout")
