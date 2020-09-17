@@ -1,6 +1,6 @@
 # CSCI Capstone B01 Yellow Team
 
-How to:
+## Using this app locally
 
 Make sure you have at least Python v3.8.2<br />
 Clone this repository<br />
