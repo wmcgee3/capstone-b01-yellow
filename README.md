@@ -1,5 +1,3 @@
-# CSCI Capstone B01 Yellow Team
-
 ## Using this app locally
 
 Make sure you have at least Python v3.8.2<br />
@@ -10,7 +8,7 @@ Run "python run.py"<br />
 Open your web browser to "localhost:5000"<br />
 
 
-<b>DO NOT</b> run setup-user.py. This script needs to be heavily modified before it will work with our data structure.
+**DO NOT** run setup-user.py. This script needs to be heavily modified before it will work with our data structure.
 
 ## Contributing
  
