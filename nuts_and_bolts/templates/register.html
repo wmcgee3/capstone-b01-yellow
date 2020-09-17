@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group col-md-8">
+            <legend class="border-bottom mb-4">Create Account</legend>
+            <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
+
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.confirm_password.label(class="form-control-label") }}
+                {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.confirm_password(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <div class="form-control-label mb-2">Account privileges</div>
+                <div class="form-check mb-4">
+                    {{ form.account_active(class="form-check-input") }}
+                    {{ form.account_active.label(class="form-check-label") }}
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        {{ form.create_users(class="form-check-input") }}
+                        {{ form.create_users.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.edit_users(class="form-check-input") }}
+                        {{ form.edit_users.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.delete_users(class="form-check-input") }}
+                        {{ form.delete_users.label(class="form-check-label") }}
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        {{ form.create_posts(class="form-check-input") }}
+                        {{ form.create_posts.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.change_post_statuses(class="form-check-input") }}
+                        {{ form.change_post_statuses.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.delete_posts(class="form-check-input") }}
+                        {{ form.delete_posts.label(class="form-check-label") }}
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                        {{ form.create_comments(class="form-check-input") }}
+                        {{ form.create_comments.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.delete_comments(class="form-check-input") }}
+                        {{ form.delete_comments.label(class="form-check-label") }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-dark") }}
+        </div>
+    </form>
+</div>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
+    </small>
+</div>
+{% endblock content %}

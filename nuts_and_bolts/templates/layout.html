@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dropzone.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <title>Nuts & Bolts</title>
+</head>
+
+<body>
+  <header class="site-header nav-font">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('main.home') }}">
+          <img src="{{ url_for('static', filename='logos/logo.png') }}" class="d-inline-block align-middle"
+            style="height: 40px;width: auto;">
+          <span class="ml-1 align-bottom">Nuts & Bolts</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+          aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="spacer-2"></div>
+
+          <div class="navbar-nav ml-auto mr-auto">
+            {% for key, values in nav_links.items() %}
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">{{ key | title }}</a>
+              <div class="dropdown-menu">
+                <div class="nav-item dropdown">
+                  <a class="dropdown-item" href="{{ url_for('products.category', cat=key|replace(' ', '_')) }}">All</a>
+                  <div class="dropdown-divider"></div>
+                  {% for value in values %}
+                  <a class="dropdown-item" href="{{ url_for('products.subcategory', cat=key|replace(' ', '_'), subcategory=value|replace(' ', '_')) }}">{{ value | title }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="navbar-nav">
+            <div class="spacer-1"></div>
+            <a class="nav-item nav-link" href="{{ url_for('main.faq') }}">FAQ</a>
+            <a class="nav-item nav-link" href="{{ url_for('main.contact_us') }}">Contact Us</a>
+          </div>
+          <a class="nav-item nav-link" href="{{ url_for('main.home') }}">
+            <!-- Change conditional to check for items in shopping cart -->
+            {% if true %}
+            <img src="{{ url_for('static', filename='logos/full-cart.png') }}" class="d-inline-block align-middle"
+              style="height: 24px;width: auto;">
+            {% else %}
+            <img src="{{ url_for('static', filename='logos/empty-cart.png') }}" class="d-inline-block align-middle"
+              style="height: 24px;width: auto;">
+            {% endif %}
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main role="main" class="container">
+    <div class="row">
+      <div class="w-100 mx-15px">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </main>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/dropzone.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script>
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div>
+
+    <h1 class="text-center my-5">
+        {%- if category -%}
+        {{ category|title }}
+        {%- elif subcategory -%}
+        {{ subcategory|title }}
+        {%- endif -%}
+    </h1>
+    {% for product in product_list %}
+    <div class="text-center mb-1">{{ product|title }}</div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
