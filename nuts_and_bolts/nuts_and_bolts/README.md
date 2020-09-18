@@ -2,7 +2,7 @@
 
 Make sure you have at least Python v3.8.2<br />
 Clone this repository<br />
-In PowerShell/CMD, navigate to the Capstone folder<br />
+In PowerShell/CMD, navigate to the first "nuts_and_bolts" folder (the one with run.py and requirements.txt in it).<br />
 Run "pip install -r requirements.txt"<br />
 Run "python run.py"<br />
 Open your web browser to "localhost:5000"<br />
