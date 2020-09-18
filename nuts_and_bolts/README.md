@@ -1,6 +1,6 @@
 ## Using this app locally
 
-Make sure you have at least Python v3.8.2<br />
+Make sure you have **Python 3.8.2**<br />
 Clone this repository<br />
 In PowerShell/CMD, navigate to the first "nuts_and_bolts" folder (the one with run.py and requirements.txt in it).<br />
 Run "pip install -r requirements.txt"<br />
