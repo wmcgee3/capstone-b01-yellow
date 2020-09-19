@@ -14,25 +14,9 @@ def load_user(user_id):
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    carts = db.relationship('Cart', backref='user', lazy=True)
 
     def __repr__(self):
         return self.email
-
-
-class Cart(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    open = db.Column(db.Boolean, nullable=False, default=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-
-class UserCartLink(db.Model):
-    cart_id = db.Column(db.Integer, ForeignKey('cart.id'), primary_key=True)
-    product_id = db.Column(db.Integer, ForeignKey(
-        'product.id'), primary_key=True)
-    count = db.Column(db.Integer, nullable=False, default=1)
-    cart = db.relationship('Cart', backref='product_link', lazy=True)
-    product = db.relationship('Product', backref='cart_link', lazy=True)
 
 
 class Product(db.Model):

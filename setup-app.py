@@ -145,4 +145,3 @@ with app.app_context():
     print(db.session.query(Subcategory).all())
     print(db.session.query(Brand).all())
     print(db.session.query(Product).all())
-
