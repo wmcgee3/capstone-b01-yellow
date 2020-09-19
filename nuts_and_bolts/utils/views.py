@@ -18,8 +18,4 @@ def get_nav_links():
 
 
 def get_cart():
-    if 'cart' in session:
-        _cart = session['cart']
-    else:
-        _cart = {}
-    return _cart
+    return session['cart'] if 'cart' in session else {}
