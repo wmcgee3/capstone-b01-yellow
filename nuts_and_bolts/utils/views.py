@@ -1,4 +1,5 @@
 from collections import defaultdict
+from flask import session
 from flask_login import current_user
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Category, Subcategory
@@ -15,3 +16,10 @@ def get_nav_links():
         category_dict[key].append(value)
     return category_dict
 
+
+def get_cart():
+    if 'cart' in session:
+        _cart = session['cart']
+    else:
+        _cart = {}
+    return _cart

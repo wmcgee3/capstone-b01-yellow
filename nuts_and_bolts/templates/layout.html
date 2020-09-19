@@ -50,11 +50,11 @@
           </div>
           <a class="nav-item nav-link" href="{{ url_for('main.home') }}">
             <!-- Change conditional to check for items in shopping cart -->
-            {% if true %}
-            <img src="{{ url_for('static', filename='logos/full-cart.png') }}" class="d-inline-block align-middle"
+            {% if cart == {} %}
+            <img src="{{ url_for('static', filename='logos/empty-cart.png') }}" class="d-inline-block align-middle"
               style="height: 24px;width: auto;">
             {% else %}
-            <img src="{{ url_for('static', filename='logos/empty-cart.png') }}" class="d-inline-block align-middle"
+            <img src="{{ url_for('static', filename='logos/full-cart.png') }}" class="d-inline-block align-middle"
               style="height: 24px;width: auto;">
             {% endif %}
           </a>
