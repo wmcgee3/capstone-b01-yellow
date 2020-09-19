@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_seeder import FlaskSeeder
-from nuts_and_bolts.config import Config
+from nuts_and_bolts import Config
 from pil import Image
 
 db = SQLAlchemy()
