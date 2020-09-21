@@ -6,7 +6,7 @@ from flask_mail import Mail
 from flask_moment import Moment
 from flask_seeder import FlaskSeeder
 from nuts_and_bolts.config import Config
-from pil import Image
+from PIL import Image
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
