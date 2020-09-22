@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div>
+    <h1 class="text-center mt-5">Your cart contents:</h1>
+</div>
+<div>
+    {%- for key, value in cart -%}
+    <p>
+    <div>Item: {{ key | title }}</div>
+    <div>Quantity: {{ value }}</div>
+    </p>
+    {%- endfor -%}
+</div>
+
+{% endblock content %}

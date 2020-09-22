@@ -30,3 +30,9 @@ def contact_us():
     nav_links = get_nav_links()
     return render_template('contact_us.html', cart=cart, nav_links=nav_links)
     
+
+@main.route('/cart')
+def cart():
+    cart = get_cart()
+    nav_links = get_nav_links()
+    return render_template('cart.html', cart=cart, nav_links=nav_links)
