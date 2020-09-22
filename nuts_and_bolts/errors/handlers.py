@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from nuts_and_bolts.utils.views import get_cart, get_nav_links
+from nuts_and_bolts.shared.utils import get_cart, get_nav_links
 
 errors = Blueprint("errors", __name__)
 

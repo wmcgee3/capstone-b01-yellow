@@ -5,7 +5,7 @@ from flask.helpers import make_response, url_for
 from sqlalchemy import func, select
 from nuts_and_bolts import db
 from nuts_and_bolts.main.utils import get_cities, get_sites, get_js_date
-from nuts_and_bolts.utils.views import get_cart, get_nav_links
+from nuts_and_bolts.shared.utils import get_cart, get_nav_links
 
 main = Blueprint('main', __name__)
 

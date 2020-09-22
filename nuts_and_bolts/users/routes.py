@@ -5,7 +5,7 @@ from nuts_and_bolts import db, bcrypt
 from nuts_and_bolts.users.forms import (RegisterForm, CreateAccountForm, LoginForm, UpdateAccountForm,
                                RequestResetForm, ResetPasswordForm)
 from nuts_and_bolts.users.utils import send_reset_email
-from nuts_and_bolts.utils.views import get_nav_links
+from nuts_and_bolts.shared.utils import get_nav_links
 
 users = Blueprint('users', __name__)
 
