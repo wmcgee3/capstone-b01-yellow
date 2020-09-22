@@ -36,3 +36,4 @@ def cart():
     cart = get_cart()
     nav_links = get_nav_links()
     return render_template('cart.html', cart=cart, nav_links=nav_links)
+    #datetime.now(timezone.utc)

@@ -60,3 +60,10 @@ class Category(db.Model):
 
     def __repr__(self):
         return self.name
+
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), nullable=False)
+    date_time = db.Column(db.DateTime, nullable=False)
+    contents = db.Column(db.Unicode, nullable=False)
