@@ -1,3 +1,7 @@
+# Nuts & Bolts specific
+setup-app.py
+setup-user.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
