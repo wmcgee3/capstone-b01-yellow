@@ -5,6 +5,8 @@ from nuts_and_bolts.models import Category, Subcategory, Product
 
 products = Blueprint('products', __name__)
 
+# Testing branch update
+
 @products.route('/<string:cat>')
 def category(cat):
     cart = get_cart()
