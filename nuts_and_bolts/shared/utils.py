@@ -1,6 +1,5 @@
 from collections import defaultdict
 from flask import session
-from flask_login import current_user
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Category, Subcategory
 

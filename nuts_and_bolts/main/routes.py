@@ -1,10 +1,4 @@
-from datetime import datetime
-from flask import abort, render_template, redirect, request, Blueprint, jsonify, session
-from flask_login import login_required, current_user
-from flask.helpers import make_response, url_for
-from sqlalchemy import func, select
-from nuts_and_bolts import db
-from nuts_and_bolts.main.utils import get_cities, get_sites, get_js_date
+from flask import render_template, Blueprint
 from nuts_and_bolts.shared.utils import get_cart, get_nav_links
 
 main = Blueprint('main', __name__)
