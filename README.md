@@ -8,8 +8,6 @@ Run "python run.py"<br />
 Open your web browser to "localhost:5000"<br />
 
 
-**DO NOT** run setup-user.py. This script needs to be heavily modified before it will work with our data structure.
-
 ## Contributing
  
  Create a new branch from "master"<br />
