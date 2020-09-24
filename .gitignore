@@ -1,4 +1,5 @@
 # Nuts & Bolts specific
+.vscode/
 setup-app.py
 setup-user.py
 
