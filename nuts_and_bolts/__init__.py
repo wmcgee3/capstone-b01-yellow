@@ -15,7 +15,7 @@ login_manager.login_message_category = 'info'
 mail = Mail()
 seeder = FlaskSeeder()
 try:
-    logo = Image.open("static/images/logo.png")
+    logo = Image.open('static/images/logo.png')
 except:
     pass
 
