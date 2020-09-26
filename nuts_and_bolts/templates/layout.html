@@ -25,40 +25,15 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="spacer-2"></div>
           <div class="navbar-nav ml-auto mr-auto">
-            {% for key, values in nav_links.items() %}
-            <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">{{ key | title }}</a>
-              <div class="dropdown-menu">
-                <div class="nav-item dropdown">
-                  <a class="dropdown-item" href="{{ url_for('products.category', cat = key | replace(' ', '_')) }}">All</a>
-                  <div class="dropdown-divider"></div>
-                  {% for value in values %}
-                  <a class="dropdown-item"
-                    href="{{ url_for('products.subcategory', cat = key | replace(' ', '_'), subcategory = value | replace(' ', '_')) }}">{{ value | title }}</a>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-            {% endfor %}
+            <a class="nav-item nav-link" href="{{ url_for('main.products') }}">Products</a>
           </div>
+          <div class="spacer-2"></div>
           <div class="navbar-nav">
             <div class="spacer-1"></div>
             <a class="nav-item nav-link" href="{{ url_for('main.faq') }}">FAQ</a>
             <a class="nav-item nav-link" href="{{ url_for('main.contact_us') }}">Contact Us</a>
           </div>
-          <a class="nav-item nav-link" href="{{ url_for('main.cart') }}">
-            <!-- Change conditional to check for items in shopping cart -->
-            {% if cart == {} %}
-            <img src="{{ url_for('static', filename = 'logos/empty-cart.png') }}" class="d-inline-block align-middle"
-              style="height: 24px;width: auto;">
-            {% else %}
-            <img src="{{ url_for('static', filename = 'logos/full-cart.png') }}" class="d-inline-block align-middle"
-              style="height: 24px;width: auto;">
-            {% endif %}
-          </a>
         </div>
       </div>
     </nav>
