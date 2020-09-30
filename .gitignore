@@ -1,6 +1,7 @@
 # Nuts & Bolts specific
 .vscode/
 setup*.py
+site.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
