@@ -7,4 +7,4 @@ class Button(db.Model):
     dateTime = db.Column(db.DateTime, nullable = False, default = datetime.utcnow())
 
     def __repr__(self):
-        return self.dateTime.strftime("%H:%M:%S.%f - %b %d %Y")
+        return self.dateTime.strftime("%b %d %Y at %H:%M:%S UTC")
