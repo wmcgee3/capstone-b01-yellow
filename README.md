@@ -4,7 +4,7 @@ Make sure you have **Python 3.8.2**<br />
 Clone this repository<br />
 In PowerShell/CMD, navigate to the repository folder (the one with run.py and requirements.txt in it).<br />
 Run "pip install -r requirements.txt"<br />
-Run "python run.py"<br />
+Run "python app.py"<br />
 Open your web browser to "localhost:5000"<br />
 
 
