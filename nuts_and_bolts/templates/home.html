@@ -1,11 +1,14 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<div>
-  <h1 class="text-center mt-5 mb-5">Home Page</h1>
+<div class="text-center">
+  <h1 class="my-5">Home Page</h1>
 </div>
-<div>
-  <h2 class="text-center mt-5">Button last pressed on {{ last_button_press }}</h2>
+<div class="text-center">
+  <form action="" method="POST">
+    <button class="mt-5 my-2">Press Me!</button>
+  </form>
+  <p>Button last pressed on {{ last_button_press }}</p>
 </div>
 
 {% endblock content %}
