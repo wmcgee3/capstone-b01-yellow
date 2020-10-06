@@ -15,3 +15,7 @@ def home():
     else:
         last_button_press = db.session.query(Button).first()
         return render_template('home.html', last_button_press=last_button_press)
+
+@main.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')
