@@ -2,11 +2,16 @@
 {% block content %}
 
 <div class="banner-home1">
-  <h1 class="my-5"> <span style = "font-size: 2em">Nuts & Bolts<br></span> <span>All the Essentials for your next home improvement project!</span> </h1>
-  <p class = "my-2">Return soon for a Nuts & Bolts online shopping experience!</p>
+  <h1 class="my-5"> <span style = "font-size: 2em">Nuts & Bolts<br></span>  </h1> 
 </div>
+
 <div class="banner-home2">
-  <p></p>
+  <h2 class="my-3"><span>All the Essentials for your next home improvement project</span></h2>
+  <img src="{{ url_for('static', filename = 'images/Carpenter-Photo.jpg') }}">
+  <br>
+  <h2 class="my-2"><span>Design your Dreams</span></h2>
+  <br>
+  <p class = "my-2">Return soon for a Nuts & Bolts online shopping experience!</p>
 </div>
 
 {% endblock content %}
