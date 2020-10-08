@@ -12,15 +12,15 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #5f788a;
 }
 
-.site-header .navbar-nav .nav-link, footer.footer a {
+.site-header .navbar-nav .nav-link, .nav-font a {
   color: #cbd5db;
 }
 
-.site-header .navbar-nav .nav-link:hover, footer.footer a:hover {
+.site-header .navbar-nav .nav-link:hover, .nav-font a:hover {
   color: #ffffff;
 }
 
-.site-header .navbar-nav .nav-link.active, footer.footer a:active {
+.site-header .navbar-nav .nav-link.active, .nav-font a:active {
   font-weight: 500;
 }
 
