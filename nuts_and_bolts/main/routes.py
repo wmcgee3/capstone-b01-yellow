@@ -1,17 +1,16 @@
-from datetime import datetime
-from flask import Blueprint, redirect, render_template, request, url_for
-from nuts_and_bolts.models import db, Button
+from flask import Blueprint, render_template
+from nuts_and_bolts import db
+from nuts_and_bolts.models import Products
 
 main = Blueprint('main', __name__)
 
 
-@main.route('/', methods=['GET', 'POST'])
+@main.route('/')
 def home():
-    if request.method == 'POST':
-        button = db.session.query(Button).first()
-        button.dateTime = datetime.utcnow()
-        db.session.commit()
-        return redirect(url_for('main.home'))
-    else:
-        last_button_press = db.session.query(Button).first()
-        return render_template('home.html', last_button_press=last_button_press)
+    return render_template('home.html')
+
+
+@main.route('/product_list')
+def product_list():
+    product_list = db.session.query(Products).order_by(Products.sku)
+    return render_template('product_list.html', product_list=product_list)
