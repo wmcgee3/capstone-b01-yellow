@@ -10,6 +10,11 @@ def home():
     return render_template('home.html')
 
 
+@main.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')
+
+
 @main.route('/product_list')
 def product_list():
     product_list = db.session.query(Products).order_by(Products.sku)
