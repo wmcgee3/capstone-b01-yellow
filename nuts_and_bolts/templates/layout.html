@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="{{ url_for('static', filename = 'logos/favicon.ico') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/sticky-footer-navbar.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   <title>Nuts & Bolts</title>
 </head>
@@ -20,6 +21,20 @@
             style="height: 40px;width: auto;">
           <span class="ml-1 align-bottom">Nuts & Bolts</span>
         </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+          aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <!-- Links for the middle of the nav bar inside this div -->
+          <div class="navbar-nav ml-auto">
+            <!-- The route in the url_for needs to be updated to the real route before it will work -->
+            <a class="nav-item nav-link" href="{{ url_for('main.product_list') }}">Product List</a>
+          </div>
+          <!-- Links for the right side of the nav bar inside this div -->
+          <div class="navbar-nav ml-auto">
+          </div>
+        </div>
       </div>
     </nav>
   </header>
@@ -39,6 +54,11 @@
       </div>
     </div>
   </main>
+  <footer class="footer bg-dark">
+    <div class="container nav-font text-center">
+      <a href="{{ url_for('main.home') }}">Contact Us</a>
+    </div>
+  </footer>
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-3.2.1.slim.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js') }}"></script>
 </body>
