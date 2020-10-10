@@ -70,7 +70,6 @@ a.article-title:hover {
 }
 
 .banner-home1{
-  
   background-image: url('../images/banner-1.png');
 }
 
@@ -79,10 +78,6 @@ a.article-title:hover {
   text-shadow: black 3px 3px;
   
 }
-
-.banner-home2{
-  
-  }
 
 .banner-home2 h2, .banner-home2 p{
   color: #444444;
