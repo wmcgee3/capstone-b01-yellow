@@ -69,6 +69,20 @@ a.article-title:hover {
   vertical-align: middle;
 }
 
+.banner-home1{
+  background-image: url('../images/banner-1.png');
+}
+
+.banner-home1 h1, .banner-home1 h2{
+  color: whitesmoke;
+  text-shadow: black 3px 3px;
+  
+}
+
+.banner-home2 h2, .banner-home2 p{
+  color: #444444;
+}
+
 .routine {
   border: 5px solid lightgrey;
 }
