@@ -69,17 +69,18 @@ a.article-title:hover {
   vertical-align: middle;
 }
 
-.banner-home1{
+.banner-home1 {
   background-image: url('../images/banner-1.png');
 }
 
-.banner-home1 h1, .banner-home1 h2{
+.banner-home1 h1 {
+  font-size: 5em;
   color: whitesmoke;
   text-shadow: black 3px 3px;
   
 }
 
-.banner-home2 h2, .banner-home2 p{
+.banner-home2 h2, .banner-home2 p {
   color: #444444;
 }
 
@@ -167,4 +168,8 @@ img.thumb {
   src: local('Special Elite Regular'), local('SpecialElite-Regular'), url(https://fonts.gstatic.com/s/specialelite/v11/XLYgIZbkc4JPUL5CVArUVL0ntnAOSA.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   text-decoration: none;
+}
+
+.contact-1 {
+  font-size: 5em;
 }
