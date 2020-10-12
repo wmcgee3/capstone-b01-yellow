@@ -19,3 +19,7 @@ def contact_us():
 def product_list():
     products = db.session.query(Products).order_by(Products.sku)
     return render_template('product_list.html', products=products)
+
+@main.route('/add_to_inventory')
+def add_to_inventory():
+    return render_template('add_to_inventory.html')
