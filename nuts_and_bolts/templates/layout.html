@@ -28,11 +28,19 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <!-- Links for the middle of the nav bar inside this div -->
           <div class="navbar-nav ml-auto">
-            <!-- The route in the url_for needs to be updated to the real route before it will work -->
             <a class="nav-item nav-link" href="{{ url_for('main.product_list') }}">Product List</a>
           </div>
           <!-- Links for the right side of the nav bar inside this div -->
           <div class="navbar-nav ml-auto">
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkManageInventory"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Manage Inventory
+              </a>
+              <div class="dropdown-menu bg-dark navbar-dark" aria-labelledby="navbarDropdownMenuLinkManageInventory">
+                <a class="dropdown-item nav-link" href="{{ url_for('main.home') }}">Add Inventory</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
