@@ -6,6 +6,7 @@
 </div>
 {% if products %}
 {% for product in products %}
+{% if product.quantity > 0 %}
 <article class="media rounded content-section my-2">
     <div class="media-body">
         <div class="article-metadata no-overflow">
@@ -16,6 +17,7 @@
         <p class="article-content text-wrap-word-break">{{ product.description }}</p>
     </div>
 </article>
+{% endif %}
 {% endfor %}
 {% else %}
 <h2>Uh-oh, it looks like there aren't any products to display.</h2>
