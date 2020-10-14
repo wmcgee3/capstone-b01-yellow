@@ -23,7 +23,7 @@ def product_list():
 
 @main.route('/add_to_inventory')
 def add_to_inventory(methods=('POST')):
-    form = InventoryForm(csrf_enabled=False)
+    form = InventoryForm()
     if form.validate_on_submit():
         return render_template('/')
     return render_template('add_to_inventory.html')
