@@ -6,3 +6,4 @@ class InventoryForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
     price = StringField('price', validators=[DataRequired()])
+    
