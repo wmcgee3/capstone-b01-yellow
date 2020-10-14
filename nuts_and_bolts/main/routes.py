@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
+from nuts_and_bolts.inventoryForm import InventoryForm
 
 main = Blueprint('main', __name__)
 
@@ -21,5 +22,8 @@ def product_list():
     return render_template('product_list.html', products=products)
 
 @main.route('/add_to_inventory')
-def add_to_inventory():
+def add_to_inventory(methods=('POST')):
+    form = InventoryForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        return render_template('/')
     return render_template('add_to_inventory.html')
