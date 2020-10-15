@@ -19,3 +19,8 @@ def contact_us():
 def product_list():
     products = db.session.query(Products).order_by(Products.sku)
     return render_template('product_list.html', products=products)
+
+
+@main.route('/faq')
+def faq():
+    return render_template('faq.html')
