@@ -28,7 +28,10 @@ def create_app(config_class=Config):
     with app.app_context():
         from nuts_and_bolts.main.routes import main
         from nuts_and_bolts.errors.handlers import errors
+        from nuts_and_bolts.management.routes import management
+
         app.register_blueprint(main)
         app.register_blueprint(errors)
+        app.register_blueprint(management)
 
         return app

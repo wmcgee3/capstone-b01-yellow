@@ -24,3 +24,4 @@ def product_list():
 @main.route('/faq')
 def faq():
     return render_template('faq.html')
+  
