@@ -8,4 +8,4 @@ def add_to_inventory():
     form = InventoryForm()
     if form.validate_on_submit():
         return redirect(url_for('main.home'))
-    return render_template('add_to_inventory.html')
+    return render_template('add_to_inventory.html', form=form)

@@ -1,4 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1
+<div class='content-section'>
+    <h1 class='inventory-1 mb-5'>Add to Inventory</h1>
+    <form method="POST">
+        <div class="form-field">{{ form.name.label }} {{ form.name(size=20) }}</div>
+        <div class="form-field">{{ form.description.label }} {{ form.description }}</div>
+        <div class="form-field">{{ form.price.label }} {{ form.price }}</div>
+        <div class="form-field">{{ form.sku.label }} {{ form.sku }}</div>
+        <div class="form-field">{{ form.quantity.label }} {{ form.quantity }}</div>
+        {{ form.submit }}
+    </form>
+</div>
 {% endblock content %}
