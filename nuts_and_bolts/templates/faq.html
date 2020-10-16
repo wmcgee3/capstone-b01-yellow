@@ -1,0 +1,51 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+
+<div class="text-center">
+    <h1 class="contact-1 mb-5">Frequently Asked Questions</h1>
+   
+    <div class="media border p-3 mb-2">
+        <img src="{{ url_for('static', filename = 'images/Q.png') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+        <div class="media-body">
+          <h2>Question: <small><i>Asked on February 19, 2020</i></small></h2>
+          <p>I just placed an order, how do I cancel it?</p>
+          <div class="media p-3">
+            <img src="{{ url_for('static', filename = 'images/A.png') }}" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+            <div class="media-body">
+              <h2>Answer: <small><i>Posted on April 20 2020</i></small></h2>
+              <p>Please contact us to cancel the order. Follow the "Contact us" button below.</p>
+            </div>
+          </div>  
+        </div>
+      </div>
+    <div class="media border p-3 mb-2">
+        <img src="{{ url_for('static', filename = 'images/Q.png') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+        <div class="media-body">
+          <h2>Question: <small><i>Asked on February 19, 2020</i></small></h2>
+          <p>How long before I can come and pick my order up?</p>
+          <div class="media p-3">
+            <img src="{{ url_for('static', filename = 'images/A.png') }}" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+            <div class="media-body">
+              <h2>Answer: <small><i>Posted on April 20 2020</i></small></h2>
+              <p>Please allow a few hours before you come and pick up. If ordered after 2pm, you must wait until next business day.</p>
+            </div>
+          </div>  
+       </div>
+      </div>
+    <div class="media border p-3 mb-2">
+      <img src="{{ url_for('static', filename = 'images/Q.png') }}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+      <div class="media-body">
+        <h2>Question: <small><i>Asked on February 19, 2020</i></small></h2>
+        <p>Can I pay online?</p>
+        <div class="media p-3">
+          <img src="{{ url_for('static', filename = 'images/A.png') }}" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+          <div class="media-body">
+            <h2>Answer: <small><i>Posted on April 20 2020</i></small></h2>
+            <p>No, you must pay in store when you pick up the products. You can pay via cash or card.</p>
+          </div>
+        </div>  
+     </div>
+     </div>  
+</div>
+
+{% endblock content %}
