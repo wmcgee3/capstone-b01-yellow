@@ -64,12 +64,9 @@
   </main>
   <footer class="footer bg-dark">
     <div class="container nav-font text-center">
-      <a href="{{ url_for('main.contact_us') }}">Contact Us</a>
-    </div>     
-
-    <div class="container nav-font text-center">
-      <a href="{{ url_for('main.faq') }}">FAQ</a>
-    </div>     
+      <a class="mx-5" href="{{ url_for('main.contact_us') }}">Contact Us</a>
+      <a class="mx-5" href="{{ url_for('main.faq') }}">FAQ</a>
+    </div>
   </footer>
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-3.2.1.slim.min.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap.bundle.min.js') }}"></script>
