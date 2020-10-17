@@ -12,7 +12,7 @@ def add_to_inventory():
     if form.validate_on_submit():
         new_product = Products(
             name=form.name.data,
-            desc=form.description.data,
+            description=form.description.data,
             price=str(form.price.data),
             sku=form.sku.data,
             quantity=form.quantity.data
