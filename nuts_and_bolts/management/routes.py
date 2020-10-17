@@ -13,9 +13,9 @@ def add_to_inventory():
         new_product = Products(
             name=form.name.data,
             description=form.description.data,
-            price=str(form.price.data),
-            sku=form.sku.data,
-            quantity=form.quantity.data
+            price=form.price.data,
+            sku=int(form.sku.data),
+            quantity=int(form.quantity.data)
         )
         db.session.add(new_product)
         db.session.commit()
