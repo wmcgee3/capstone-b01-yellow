@@ -22,3 +22,8 @@ def add_to_inventory():
         flash(f'Entry created for {form.name.data}!', 'success')
         return redirect(url_for('main.product_list'))
     return render_template('add_to_inventory.html', form=form)
+
+#update inventory
+@management.route('/management/update_inventory')
+def update_inventory():
+    return render_template('update_inventory.html')
