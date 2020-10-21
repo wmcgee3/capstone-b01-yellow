@@ -14,7 +14,8 @@
             <span class="font-weight-bold float-right">SKU: {{ product.sku }}</span>
         </div>
         <h2 class="article-title">{{ product.name | title }}</h2>
-        <p class="article-content text-wrap-word-break">{{ product.description }}</p>
+        <p class="article-content text-wrap-word-break" >{{ product.description }}</p>
+        <a class="btn btn-secondary btn-sm float-right" href="#" role="button">Update</a>
     </div>
 </article>
 {% endif %}
