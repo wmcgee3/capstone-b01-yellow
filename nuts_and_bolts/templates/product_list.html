@@ -15,7 +15,7 @@
         </div>
         <h2 class="article-title">{{ product.name | title }}</h2>
         <p class="article-content text-wrap-word-break" >{{ product.description }}</p>
-        <a class="btn btn-secondary btn-sm float-right" href="#" role="button">Update</a>
+        <a class="btn btn-secondary btn-sm float-right" href="{{url_for('management.update_inventory', sku=product.sku)}}" role="button">Update</a>
     </div>
 </article>
 {% endif %}
