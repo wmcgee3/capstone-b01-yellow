@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
+from nuts_and_bolts.shared.utils import get_cart
 
 main = Blueprint('main', __name__)
 
@@ -24,4 +25,9 @@ def product_list():
 @main.route('/faq')
 def faq():
     return render_template('faq.html')
+
+@main.route('/show_cart')
+def show_cart():
+    cart = get_cart()
+    return render_template('show_cart.html')
   
