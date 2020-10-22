@@ -28,6 +28,16 @@ def faq():
 
 @main.route('/show_cart')
 def show_cart():
-    cart = get_cart()
-    return render_template('show_cart.html')
+    simple_cart = get_cart()
+    cart = {}
+    products = db.session.query(Products).order_by(Products.id)
+    for item in simple_cart:
+        for product in products:
+            if item == product.id:
+                cart[item] = {"name" : product.name,
+                "price" : product.price,
+                "sku" : product.sku,
+                "quantity" : simple_cart[item]}
+
+    return render_template('show_cart.html', cart=cart)
   

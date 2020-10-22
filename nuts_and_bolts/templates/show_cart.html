@@ -4,16 +4,16 @@
 <div class="my-5">
     <h1 class="text-center">Cart</h1>
 </div>
-{% if x in cart %}
-{% for x in cart %}
+{% if items in cart %}
+{% for items in cart %}
 <article class="media rounded content-section my-2">
     <div class="media-body">
         <div class="article-metadata no-overflow">
-            <span class="font-weight-bold">${{ x.get("price") }}</span>
-            <span class="font-weight-bold float-right">SKU: {{ x.get("sku") }}</span>
+            <span class="font-weight-bold">${{ items.get("price") }}</span>
+            <span class="font-weight-bold float-right">SKU: {{ items.get("sku") }}</span>
         </div>
-        <h2 class="article-title">{{ x.get("name") | title }}</h2>
-        <p class="font-weight-bold float-right">Quantity: {{ x.get("quantity") }}</p>
+        <h2 class="article-title">{{ items.get("name") | title }}</h2>
+        <p class="font-weight-bold float-right">Quantity: {{ items.get("quantity") }}</p>
     </div>
 </article>
 {% endfor %}
