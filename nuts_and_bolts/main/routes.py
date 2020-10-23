@@ -49,10 +49,9 @@ def show_cart():
 def add_to_cart(id):
     cart = get_cart()
     if id in cart:
-        cart[id] = cart[id] + 1
+        session['cart'][id] = cart[id] + 1
     else:
-        cart[id] = 1
-    print(session['cart'])
+        session['cart'][id] = 1
     product = db.session.query(Products).filter_by(id=id).first()
     flash(product.name + ' added to cart!', 'success')
-    return redirect(url_for('main.show_cart'))
+    return redirect(url_for('main.show_cart', cart=cart))
