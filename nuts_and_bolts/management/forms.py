@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextField, IntegerField, DecimalField, SubmitField
-from wtforms.validators import DataRequired, Length, NumberRange, ValidationError
+from wtforms import StringField, TextField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, ValidationError
 from nuts_and_bolts.models import Products
 from nuts_and_bolts import db
 
@@ -34,7 +34,7 @@ def check_quantity(form, field):
 
 class InventoryForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), check_name])
-    description = TextField('Description', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
     price = StringField('Price', validators=[DataRequired(), check_price])
     sku = StringField('sku', validators=[DataRequired(), check_sku])
     quantity = StringField('Quantity', validators=[

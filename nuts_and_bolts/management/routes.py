@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request
 from nuts_and_bolts.management.forms import InventoryForm
 from nuts_and_bolts.models import Products
 from nuts_and_bolts import db
@@ -21,29 +21,30 @@ def add_to_inventory():
         db.session.commit()
         flash(f'Entry created for {form.name.data}!', 'success')
         return redirect(url_for('main.product_list'))
+    form.submit.label.text = 'Add'
     return render_template('add_to_inventory.html', form=form)
 
 #update inventory item 
-@management.route('/management/update_inventory/<int:sku>',  methods=['GET', 'POST'] )
-def update_inventory(sku):
+@management.route('/management/update_inventory/<int:product_id>',  methods=['GET', 'POST'] )
+def update_inventory(product_id):
     form = InventoryForm()
     if form.validate_on_submit():
-        new_product = Products(
+        updated_product = Products(
             name=form.name.data,
             description=form.description.data,
             price=form.price.data,
             sku=int(form.sku.data),
             quantity=int(form.quantity.data)
         )
-
+        db.session.update(updated_product)
         db.session.commit()
         flash(f'Entry update for {form.name.data}!', 'success')
         return redirect(url_for('main.product_list'))
-    '''
-    elif request.method == 'GET':
-        form.name.data = product.name,
-        form.description.data = product.description,
-        form.price.data = product.price,
-        form.quantity.data = int(product.quantity),
-    '''
-    return render_template('update_inventory.html', form=form)   
+    product = db.session.query(Products).filter(Products.id==product_id).first()
+    form.name.data = product.name
+    form.description.data = product.description
+    form.price.data = product.price
+    form.sku.data = product.sku
+    form.quantity.data = int(product.quantity)
+    form.submit.label.text = 'Update'
+    return render_template('update_inventory.html', form=form)
