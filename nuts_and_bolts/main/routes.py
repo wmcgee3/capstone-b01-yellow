@@ -48,10 +48,21 @@ def show_cart():
 @main.route('/add_to_cart/<string:id>')
 def add_to_cart(id):
     cart = get_cart()
-    if id in cart:
-        session['cart'][id] = cart[id] + 1
-    else:
-        session['cart'][id] = 1
     product = db.session.query(Products).filter_by(id=id).first()
-    flash(product.name + ' added to cart!', 'success')
-    return redirect(url_for('main.show_cart', cart=cart))
+    if product:
+        if id in cart:
+            if cart[id] + 1 <= product.quantity:
+                session['cart'][id] = cart[id] + 1
+                flash(product.name + ' added to cart!', 'success')
+            else:
+                session['cart'][id] = product.quantity
+                flash('Unable to add ' + product.name + ' to cart. There are only ' + str(product.quantity) + ' left in stock.', 'danger')
+        else:
+            if product.quantity >= 1:
+                session['cart'][id] = 1
+                flash(product.name + ' added to cart!', 'success')
+            else:
+                flash('Unable to add ' + product.name + ' to cart. That product is not currently available', 'danger')
+    else:
+        flash('Unable to add to cart. That product does not exist.', 'danger')
+    return redirect(url_for('main.show_cart'))
