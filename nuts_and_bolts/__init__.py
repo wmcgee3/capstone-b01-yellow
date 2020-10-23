@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
@@ -19,6 +19,10 @@ except:
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    @app.before_first_request
+    def permanent_session():
+        session.permanent = True
 
     db.init_app(app)
     bcrypt.init_app(app)
