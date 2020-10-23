@@ -14,7 +14,10 @@
             <span class="font-weight-bold float-right">SKU: {{ product.sku }}</span>
         </div>
         <h2 class="article-title">{{ product.name | title }}</h2>
-        <p class="article-content text-wrap-word-break">{{ product.description }}</p>
+        <p class="article-content text-wrap-word-break" >{{ product.description }}</p>
+        <div>
+            <a class="btn btn-secondary btn-sm mt-2" href="{{ url_for('management.update_inventory', product_id=product.id) }}" role="button">Update</a>
+        </div>
     </div>
 </article>
 {% endif %}
