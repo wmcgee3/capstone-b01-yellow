@@ -27,20 +27,21 @@ def add_to_inventory():
 #update inventory item 
 @management.route('/management/update_inventory/<int:product_id>',  methods=['GET', 'POST'] )
 def update_inventory(product_id):
+    product = Products.query.get_or_404(product_id)
     form = InventoryForm()
-    if form.validate_on_submit():
-        updated_product = Products(
-            name=form.name.data,
-            description=form.description.data,
-            price=form.price.data,
-            sku=int(form.sku.data),
-            quantity=int(form.quantity.data)
-        )
-        db.session.update(updated_product)
-        db.session.commit()
-        flash(f'Entry update for {form.name.data}!', 'success')
-        return redirect(url_for('main.product_list'))
-    product = db.session.query(Products).filter(Products.id==product_id).first()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            product.name=form.name.data
+            product.description=form.description.data
+            product.price=form.price.data
+            product.sku=int(form.sku.data)
+            product.quantity=int(form.quantity.data)
+            db.session.commit()
+            flash(f'Entry updated for ' + form.name.data + '!', 'success')
+            return redirect(url_for('main.product_list'))
+        else:
+            return render_template('update_inventory.html', form=form)
+    form.id.data = product.id
     form.name.data = product.name
     form.description.data = product.description
     form.price.data = product.price
