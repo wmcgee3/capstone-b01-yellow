@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, redirect, flash, session
 from flask.helpers import url_for
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
-from nuts_and_bolts.shared.utils import get_cart
 
 main = Blueprint('main', __name__)
 
@@ -31,28 +30,26 @@ def faq():
 @main.route('/show_cart')
 def show_cart():
     cart = {}
-    simple_cart = get_cart()
-    if simple_cart:
+    if session['cart']:
         products = db.session.query(Products).filter(
-            Products.id.in_(simple_cart))
+            Products.id.in_(session['cart']))
         for product in products:
             cart[str(product.id)] = {
                 "name": product.name,
                 "price": product.price,
                 "sku": product.sku,
-                "quantity": simple_cart[str(product.id)]
+                "quantity": session['cart'][str(product.id)]
             }
     return render_template('show_cart.html', cart=cart)
 
 
 @main.route('/add_to_cart/<string:id>')
 def add_to_cart(id):
-    cart = get_cart()
     product = db.session.query(Products).filter_by(id=id).first()
     if product:
-        if id in cart:
-            if cart[id] + 1 <= product.quantity:
-                session['cart'][id] = cart[id] + 1
+        if id in session['cart']:
+            if session['cart'][id] + 1 <= product.quantity:
+                session['cart'][id] = session['cart'][id] + 1
                 flash(product.name + ' added to cart!', 'success')
             else:
                 session['cart'][id] = product.quantity
