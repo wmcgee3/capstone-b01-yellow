@@ -5,7 +5,11 @@
     <h1 class="text-center">Cart</h1>
 </div>
 {% if cart %}
-{% for key in cart %}
+{% for key in cart %
+}<div class="col-sm-12">
+    
+    <p><a id="btnEmpty" href="#" class="btn btn-danger">Clear Cart</a></p>
+</div>
 <article class="media rounded content-section my-2">
     <div class="media-body">
         <div class="article-metadata no-overflow">
