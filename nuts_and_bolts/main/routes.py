@@ -66,3 +66,9 @@ def add_to_cart(id):
     else:
         flash('Unable to add to cart. That product does not exist.', 'danger')
     return redirect(url_for('main.show_cart'))
+
+    
+@main.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
+

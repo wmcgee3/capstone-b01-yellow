@@ -17,6 +17,9 @@
     </div>
 </article>
 {% endfor %}
+<div class="text-center">
+    <a class="btn btn-secondary btn-sm mt-2" href="{{ url_for('main.checkout') }}" role="button">Checkout</a>
+</div>
 {% else %}
 <h2 class="text-center">Uh-oh, it looks like the cart is empty.</h2>
 {% endif %}
