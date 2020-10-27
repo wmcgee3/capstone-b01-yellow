@@ -66,3 +66,12 @@ def add_to_cart(id):
     else:
         flash('Unable to add to cart. That product does not exist.', 'danger')
     return redirect(url_for('main.show_cart'))
+
+@main.route('/clear_cart')
+def clear_cart():
+        session.clear()
+        flash('Your cart has been cleared!', 'danger')
+        products = db.session.query(Products).order_by(Products.sku)
+        return render_template('product_list.html', products=products)
+       
+    
