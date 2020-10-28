@@ -64,7 +64,15 @@ def add_to_cart(id):
         flash('Unable to add to cart. That product does not exist.', 'danger')
     return redirect(url_for('main.show_cart'))
 
-    
+
+@main.route('/clear_cart')
+def clear_cart():
+        session['cart'] = {}
+        flash('Your cart has been cleared!', 'danger')
+        products = db.session.query(Products).order_by(Products.sku)
+        return render_template('product_list.html', products=products)
+
+
 @main.route('/checkout')
 def checkout():
     cart = get_cart()
@@ -87,4 +95,3 @@ def checkout():
     else:
         flash(message + 'quantity is greater than what is in stock!', 'error')
     return redirect(url_for('main.show_cart'))
-
