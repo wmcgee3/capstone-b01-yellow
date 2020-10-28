@@ -70,5 +70,24 @@ def add_to_cart(id):
     
 @main.route('/checkout')
 def checkout():
-    return render_template('checkout.html')
+    cart = get_cart()
+    itemschecked = 0
+    errors = 0
+    message = ''
+    for id in cart:
+        product = db.session.query(Products).filter_by(id=id).first()
+        if product.quantity >= cart[id]:
+            product.quantity -= cart[id]
+            itemschecked += cart[id]
+        else:
+            errors += 1
+            message += product.name + ', '
+
+    if errors == 0:
+        db.session.commit()
+        session.clear()
+        flash(str(itemschecked) + ' items successfully checked out!', 'success')
+    else:
+        flash(message + 'quantity is greater than what is in stock!', 'error')
+    return redirect(url_for('main.show_cart'))
 
