@@ -21,7 +21,9 @@ def create_app(config_class=Config):
     app.config.from_object(Config)
 
     @app.before_first_request
-    def permanent_session():
+    def initiate_session():
+        if 'cart' not in session:
+            session['cart'] = {}
         session.permanent = True
 
     db.init_app(app)
