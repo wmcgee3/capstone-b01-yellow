@@ -33,6 +33,9 @@
           <!-- Links for the right side of the nav bar inside this div -->
           <div class="navbar-nav ml-auto">
             <a class="nav-item nav-link" href="{{ url_for('main.show_cart') }}">Cart</a>
+          </div>
+          {%- if current_user.is_authenticated -%}
+          <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkManageInventory"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,6 +46,7 @@
               </div>
             </div>
           </div>
+          {%- endif -%}
         </div>
       </div>
     </nav>
@@ -67,6 +71,11 @@
     <div class="container nav-font text-center">
       <a class="mx-5" href="{{ url_for('main.contact_us') }}">Contact Us</a>
       <a class="mx-5" href="{{ url_for('main.faq') }}">FAQ</a>
+      {%- if current_user.is_authenticated -%}
+      <a href="{{ url_for('auth.logout') }}" class="mx-5">Logout</a>
+      {%- else -%}
+      <a href="{{ url_for('auth.login') }}" class="mx-5">Manager Login</a>
+      {%- endif -%}
     </div>
   </footer>
   <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-3.2.1.slim.min.js') }}"></script>
