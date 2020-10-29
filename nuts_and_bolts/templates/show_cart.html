@@ -17,7 +17,7 @@
         </div>
         <h2 class="article-title">{{ cart[key]['name'] | title }}</h2>
         <p class="font-weight-bold float-right">Quantity: {{ cart[key]['quantity'] }}</p>
-        <p><a id="btnEmpty" href="{{ url_for('main.remove_item') }}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Click to remove item">Remove</a></p>
+        <p><a id='btnEmpty' href="{{ url_for('main.remove_item') }}" >Remove</a></p>
     </div>
 </article>
 {% endfor %}
