@@ -21,6 +21,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             next_page = request.args.get('next')
+            flash('You are now logged in.', 'success')
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login unsuccessful. Please check your credentials.', 'danger')
@@ -30,4 +31,5 @@ def login():
 @auth.route('/logout')
 def logout():
     logout_user()
+    flash('You are now logged out.', 'success')
     return redirect(url_for('main.home'))
