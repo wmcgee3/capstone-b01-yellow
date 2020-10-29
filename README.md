@@ -14,3 +14,9 @@ Open your web browser to "localhost:5000"<br />
  Title the branch appropriately for what you are working on (ie "product-page-layout")<br />
  Once you have finished working on it, submit a pull request<br />
  
+
+## Login Info
+
+The example login credentials are:<br />
+- email: manager@nutsandbolts.com
+- password: B01Yellow!!
