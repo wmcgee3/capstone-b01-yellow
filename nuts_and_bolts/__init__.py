@@ -1,4 +1,5 @@
 from flask import Flask, session
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
@@ -8,6 +9,9 @@ from PIL import Image
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.login_message_category = 'info'
 mail = Mail()
 seeder = FlaskSeeder()
 try:
@@ -30,12 +34,15 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     mail.init_app(app)
     seeder.init_app(app, db)
+    login_manager.init_app(app)
 
     with app.app_context():
+        from nuts_and_bolts.auth.routes import auth
         from nuts_and_bolts.main.routes import main
         from nuts_and_bolts.errors.handlers import errors
         from nuts_and_bolts.management.routes import management
 
+        app.register_blueprint(auth)
         app.register_blueprint(main)
         app.register_blueprint(errors)
         app.register_blueprint(management)
