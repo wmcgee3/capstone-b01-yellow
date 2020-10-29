@@ -65,6 +65,21 @@ def add_to_cart(id):
     return redirect(url_for('main.show_cart'))
 
 
+@main.route('/remove_item/<string:id>')
+def remove_item(id):
+    product = db.session.query(Products).filter_by(id=id).first()
+    if product:
+        if id in session['cart']:
+            if session['cart'][id] + 1 <= product.quantity:
+                session['cart'][id] = session['cart'][id] - 1
+                flash(product.name + 'removed from cart!', 'success')
+            return 
+        return
+    return redirect(url_for('main.show_cart'))
+
+
+
+
 @main.route('/clear_cart')
 def clear_cart():
         session['cart'] = {}
