@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash, session
+from flask import Blueprint, render_template, redirect, flash, session, request
 from flask.helpers import url_for
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
@@ -100,7 +100,8 @@ def checkout():
         flash('Products purchased successfully.', 'success')
         return redirect(url_for('main.home'))
 
-@main.route('/search/<string:search>')
-def search(search):
-    return render_template('search.html', search=search)
 
+@main.route('/search', methods=['GET', 'POST'])
+def search():
+    search = request.form['search']
+    return render_template('search.html', search=search)
