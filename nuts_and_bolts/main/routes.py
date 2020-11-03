@@ -104,5 +104,6 @@ def checkout():
 @main.route('/search/<string:search>')
 def search(search):
     search_terms = search.split(" ")
-    return render_template('search.html')
+    products = db.session.query(Products).order_by(Products.sku)
+    return render_template('search.html', search=search, products=products, search_terms=search_terms)
 
