@@ -32,6 +32,12 @@
           </div>
           <!-- Links for the right side of the nav bar inside this div -->
           <div class="navbar-nav ml-auto">
+            <form action="{{ url_for('main.search') }}">
+              <input type="text" placeholder="Search..." name="search">
+              <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search
+              </button>
+            </form>
             <a class="nav-item nav-link" href="{{ url_for('main.show_cart') }}">Cart</a>
           </div>
           {%- if current_user.is_authenticated -%}
