@@ -34,9 +34,7 @@
           <div class="navbar-nav ml-auto">
             <form method= "POST" action="{{ url_for('main.search', search=search) }}">
               <input type="text" placeholder="Search..." name="search">
-              <button type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span> Search
-              </button>
+              <input type="submit" value="Search" class="btn-sm btn-primary float-right">
             </form>
             <a class="nav-item nav-link" href="{{ url_for('main.show_cart') }}">Cart</a>
           </div>

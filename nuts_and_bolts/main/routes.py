@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, redirect, flash, session
 from flask.helpers import url_for
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
-from nuts_and_bolts.main.forms import SearchForm
 
 main = Blueprint('main', __name__)
 
@@ -103,7 +102,5 @@ def checkout():
 
 @main.route('/search/<string:search>')
 def search(search):
-    search_terms = search.split(" ")
-    products = db.session.query(Products).order_by(Products.sku)
-    return render_template('search.html', search=search, products=products, search_terms=search_terms)
+    return render_template('search.html', search=search)
 
