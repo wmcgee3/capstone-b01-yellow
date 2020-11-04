@@ -102,12 +102,6 @@ def checkout():
 def remove_item(id):
     product = db.session.query(Products).filter_by(id=id).first()
     if id in session['cart']:
-        if session['cart'][id] - 1 >= product.quantity:
-            session['cart'][id] = session['cart'][id] - 1
-            flash(product.name + ' added to cart!', 'success')
-        else:
-            if product.quantity <= 1:
-                session['cart'][id] = 1
-                flash(product.name + ' added to cart!', 'success')
-    else:
-        return url_for('main.show_cart')
+        session['cart'][id] = session['cart'][id] - 1
+        flash(product + 'has been removed from cart!')
+    return url_for('main.show_cart')
