@@ -53,13 +53,15 @@ def add_to_cart(id):
                 flash(product.name + ' added to cart!', 'success')
             else:
                 session['cart'][id] = product.quantity
-                flash('Unable to add ' + product.name + ' to cart. There are only ' + str(product.quantity) + ' left in stock.', 'danger')
+                flash('Unable to add ' + product.name + ' to cart. There are only ' +
+                      str(product.quantity) + ' left in stock.', 'danger')
         else:
             if product.quantity >= 1:
                 session['cart'][id] = 1
                 flash(product.name + ' added to cart!', 'success')
             else:
-                flash('Unable to add ' + product.name + ' to cart. That product is not currently available', 'danger')
+                flash('Unable to add ' + product.name +
+                      ' to cart. That product is not currently available', 'danger')
     else:
         flash('Unable to add to cart. That product does not exist.', 'danger')
     return redirect(url_for('main.show_cart'))
@@ -68,40 +70,33 @@ def add_to_cart(id):
 
 @main.route('/clear_cart')
 def clear_cart():
-        session['cart'] = {}
-        flash('Your cart has been cleared!', 'danger')
-        products = db.session.query(Products).order_by(Products.sku)
-        return render_template('product_list.html', products=products)
+    session['cart'] = {}
+    flash('Your cart has been cleared!', 'success')
+    return redirect(url_for('main.home'))
 
 
 @main.route('/checkout')
 def checkout():
-    cart = get_cart()
-    itemschecked = 0
-    errors = 0
-    message = ''
-    for id in cart:
-        product = db.session.query(Products).filter_by(id=id).first()
-        if product.quantity >= cart[id]:
-            product.quantity -= cart[id]
-            itemschecked += cart[id]
-        else:
-            errors += 1
-            message += product.name + ', '
+    errors = []
+    products = db.session.query(Products).filter(
+        Products.id.in_(session['cart']))
+    for id in session['cart'].keys():
+        for product in products:
+            if product.id == int(id):
+                if product.quantity < session['cart'][id]:
+                    errors.add(product.name)
 
-    if errors == 0:
-        db.session.commit()
-        session.clear()
-        flash(str(itemschecked) + ' items successfully checked out!', 'success')
+    if errors:
+        message = errors.join(', ')
+        flash('Error. In stock quantity of ' + message +
+              ' less than amount in cart. Amounts in cart have been adjusted to current stock.', 'danger')
+        return redirect(url_for('main.show_cart'))
     else:
-        flash(message + 'quantity is greater than what is in stock!', 'error')
-    return redirect(url_for('main.show_cart'))
-
-
-@main.route('/remove_item')
-def remove_item(id):
-    product = db.session.query(Products).filter_by(id=id).first()
-    if id in session['cart']:
-        session['cart'][id] = session['cart'][id] - 1
-        flash(product + 'has been removed from cart!')
-    return url_for('main.show_cart')
+        for id in session['cart'].keys():
+            for product in products:
+                if product.id == int(id):
+                    product.quantity -= session['cart'][id]
+        db.session.commit()
+        session['cart'] = {}
+        flash('Products purchased successfully.', 'success')
+        return redirect(url_for('main.home'))
