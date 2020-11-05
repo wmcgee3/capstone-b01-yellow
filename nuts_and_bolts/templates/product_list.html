@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
 {% block content %}
-
 <div class="my-5">
     <h1 class="text-center">Available Products</h1>
 </div>
@@ -29,7 +28,6 @@
 {% endif %}
 {% endfor %}
 {% else %}
-<h2>Uh-oh, it looks like there aren't any products to display.</h2>
+<h2 class="text-center">Uh-oh, it looks like there aren't any products to display.</h2>
 {% endif %}
-
 {% endblock content %}

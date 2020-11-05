@@ -104,4 +104,5 @@ def checkout():
 @main.route('/search', methods=['GET', 'POST'])
 def search():
     search = request.form['search']
-    return render_template('search.html', search=search)
+    products = db.session.query(Products).filter(Products.name.contains(search))
+    return render_template('search.html', search=search, products=products)
