@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, redirect, flash, session, request
+from flask import Blueprint, render_template, redirect, flash, session, abort
+
 from flask.helpers import url_for
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
@@ -67,6 +68,7 @@ def add_to_cart(id):
     return redirect(url_for('main.show_cart'))
 
 
+
 @main.route('/clear_cart')
 def clear_cart():
     session['cart'] = {}
@@ -106,3 +108,14 @@ def search():
     search = request.form['search']
     products = db.session.query(Products).filter(Products.name.contains(search))
     return render_template('search.html', search=search, products=products)
+
+
+@main.route('/remove_item/<id>')
+def remove_item(id):
+    if id in session['cart']:
+        session['cart'].pop(id, None)
+        product = db.session.query(Products).filter_by(id=id).first()
+        flash(product.name + 'has been removed from cart!', 'success')
+        return redirect(url_for('main.show_cart'))
+    else:
+        abort(404)
