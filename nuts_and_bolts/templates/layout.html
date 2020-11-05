@@ -32,6 +32,12 @@
           </div>
           <!-- Links for the right side of the nav bar inside this div -->
           <div class="navbar-nav ml-auto">
+            <form method= "POST" action="{{ url_for('main.search') }}">
+              <input type="text" placeholder="Search..." name="search">
+              <input type="submit" value="Search" class="btn-sm btn-primary float-right">
+            </form>
+          </div>
+          <div class="navbar-nav ml-auto">
             <a class="nav-item nav-link" href="{{ url_for('main.show_cart') }}">Cart</a>
           </div>
           {%- if current_user.is_authenticated -%}

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, flash, session, abort
+
 from flask.helpers import url_for
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
@@ -100,6 +101,13 @@ def checkout():
         session['cart'] = {}
         flash('Products purchased successfully.', 'success')
         return redirect(url_for('main.home'))
+
+
+@main.route('/search', methods=['GET', 'POST'])
+def search():
+    search = request.form['search']
+    products = db.session.query(Products).filter(Products.name.contains(search))
+    return render_template('search.html', search=search, products=products)
 
 
 @main.route('/remove_item/<id>')
