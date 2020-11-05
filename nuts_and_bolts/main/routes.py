@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash, session, abort
+from flask import Blueprint, render_template, redirect, flash, session, abort, request
 
 from flask.helpers import url_for
 from nuts_and_bolts import db
