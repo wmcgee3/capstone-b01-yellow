@@ -75,12 +75,12 @@
   </main>
   <footer class="footer bg-dark">
     <div class="container nav-font text-center">
-      <a class="mx-5" href="{{ url_for('main.contact_us') }}">Contact Us</a>
-      <a class="mx-5" href="{{ url_for('main.faq') }}">FAQ</a>
+      <a class="mx-4" href="{{ url_for('main.contact_us') }}">Contact Us</a>
+      <a class="mx-4" href="{{ url_for('main.faq') }}">FAQ</a>
       {%- if current_user.is_authenticated -%}
-      <a href="{{ url_for('auth.logout') }}" class="mx-5">Logout</a>
+      <a href="{{ url_for('auth.logout') }}" class="mx-4">Logout</a>
       {%- else -%}
-      <a href="{{ url_for('auth.login') }}" class="mx-5">Manager Login</a>
+      <a href="{{ url_for('auth.login') }}" class="mx-4">Login</a>
       {%- endif -%}
     </div>
   </footer>
