@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash, session
+from flask import Blueprint, render_template, redirect, flash, session, abort
 from flask.helpers import url_for
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Products
@@ -100,3 +100,14 @@ def checkout():
         session['cart'] = {}
         flash('Products purchased successfully.', 'success')
         return redirect(url_for('main.home'))
+
+
+@main.route('/remove_item/<id>')
+def remove_item(id):
+    if id in session['cart']:
+        session['cart'].pop(id, None)
+        product = db.session.query(Products).filter_by(id=id).first()
+        flash(product.name + 'has been removed from cart!', 'success')
+        return redirect(url_for('main.show_cart'))
+    else:
+        abort(404)
