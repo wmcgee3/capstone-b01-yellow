@@ -31,7 +31,7 @@ def faq():
 @main.route('/show_cart')
 def show_cart():
     cart = {}
-    if 'cart' in session:
+    if session['cart']:
         products = db.session.query(Products).filter(
             Products.id.in_(session['cart']))
         for product in products:
