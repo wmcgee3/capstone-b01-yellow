@@ -5,7 +5,6 @@
 </div>
 {% if products.count() > 0 %}
 {% for product in products %}
-{% if product.quantity > 0 %}
 <article class="media rounded content-section my-2">
     <div class="media-body">
         <div class="article-metadata no-overflow">
@@ -19,13 +18,15 @@
             <a class="btn btn-secondary btn-sm mt-2"
                 href="{{ url_for('management.update_inventory', product_id=product.id) }}" role="button">Update</a>
             {%- endif -%}
+            {%- if product.quantity == 0 -%}
+            <b class="text-danger"> OUT OF STOCK!</b>
+            {%- endif -%}            
             <form action="{{ url_for('main.add_to_cart', id=product.id) }}" class="d-inline">
                 <input type="submit" value="Add to cart" class="btn-sm btn-primary float-right">
             </form>
         </div>
     </div>
 </article>
-{% endif %}
 {% endfor %}
 {% else %}
 <h2 class="text-center">Uh-oh, it looks like there aren't any results.</h2>
