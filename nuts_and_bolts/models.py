@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
 
 receipts_products = db.Table(db.Model.metadata,
     db.Column('receipt_id', db.Integer, ForeignKey('receipt.id')),
-    db.Column('products_id', db.Integer, ForeignKey('products.id'))
+    db.Column('product_id', db.Integer, ForeignKey('product.id'))
 )
 
 
@@ -41,6 +41,6 @@ class Customer(db.Model):
 
 class Receipt(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Columns(db.integer, ForeignKey('customer.id'))
+    customer_id = db.Column(db.Integer, ForeignKey('customer.id'))
     customer = db.relationship('Customer', back_populates='receipts')
     products = db.relationship('Product', secondary=receipts_products, back_populates='receipts')
