@@ -19,7 +19,7 @@
                 href="{{ url_for('management.update_inventory', product_id=product.id) }}" role="button">Update</a>
             {%- endif -%}
             {%- if product.quantity == 0 -%}
-            <p class="article-content text-wrap-word-break">OUT OF STOCK!</p>
+            <b class="text-danger"> OUT OF STOCK!</b>
             {%- endif -%}
             <form action="{{ url_for('main.add_to_cart', id=product.id) }}" class="d-inline">
                 <input type="submit" value="Add to cart" class="btn-sm btn-primary float-right">
