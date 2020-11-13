@@ -17,10 +17,26 @@
     </div>
 </article>
 {% endfor %}
-<div class="mt-2">
-    <a href="{{ url_for('main.clear_cart') }}" class="btn btn-sm btn-danger">Clear Cart</a>
-    <a class="btn btn-secondary btn-sm float-right" href="{{ url_for('main.checkout') }}">Checkout</a>
-</div>
+<form action="" method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mt-2">
+        <div class="form-group col-md-6 ml-auto">
+            {{ form.email.label(class="form-control-label") }}
+            {% if form.email.errors %}
+            {{ form.email(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.email(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        {{ form.clear_cart(class="btn btn-sm btn-danger") }}
+        {{ form.checkout(class="btn btn-secondary btn-sm float-right") }}
+    </div>
+</form>
 {% else %}
 <h2 class="text-center">Uh-oh, it looks like the cart is empty.</h2>
 {% endif %}

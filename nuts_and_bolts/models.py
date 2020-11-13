@@ -41,6 +41,7 @@ class Customer(db.Model):
 
 class Receipt(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    datetime = db.Column(db.DateTime, nullable=False)
     customer_id = db.Column(db.Integer, ForeignKey('customer.id'))
     customer = db.relationship('Customer', back_populates='receipts')
     products = db.relationship('Product', secondary=receipts_products, back_populates='receipts')
