@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-{% if orders %}
-{% for order in orders %}
+{% if receipts %}
+{% for receipt in receipts %}
 <div>
-    <a href="{{ url_for('orders.receipt', receipt_id=order.id) }}">{{ order.datetime }}</a>
+    <a href="{{ url_for('receipts.receipt', receipt_id=receipt.id) }}">{{ receipt.datetime }}</a>
 </div>
 {% endfor %}
 {% else %}
