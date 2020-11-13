@@ -8,5 +8,5 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('NAB_USER')
-    MAIL_PASSWORD = os.environ.get('NAB_PASS')
+    MAIL_USERNAME = str(os.environ.get('NAB_USER'))
+    MAIL_PASSWORD = str(os.environ.get('NAB_PASS'))
