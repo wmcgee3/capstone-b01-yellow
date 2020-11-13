@@ -38,13 +38,17 @@ def create_app(config_class=Config):
 
     with app.app_context():
         from nuts_and_bolts.auth.routes import auth
+        from nuts_and_bolts.cart.routes import cart
         from nuts_and_bolts.main.routes import main
         from nuts_and_bolts.errors.handlers import errors
         from nuts_and_bolts.management.routes import management
+        from nuts_and_bolts.receipts.routes import receipts
 
         app.register_blueprint(auth)
+        app.register_blueprint(cart)
         app.register_blueprint(main)
         app.register_blueprint(errors)
         app.register_blueprint(management)
+        app.register_blueprint(receipts)
 
         return app

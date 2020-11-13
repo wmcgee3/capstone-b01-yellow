@@ -1,3 +1,4 @@
+from sqlalchemy.sql.schema import ForeignKey
 from nuts_and_bolts import db, login_manager
 from flask_login import UserMixin
 
@@ -13,13 +14,41 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
 
 
-class Products(db.Model):
+class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sku = db.Column(db.Integer, nullable=False, unique=True)
     name = db.Column(db.String, nullable=False, unique=True)
     price = db.Column(db.String, nullable=False)
     description = db.Column(db.Text)
     quantity = db.Column(db.Integer, nullable=False, default=0)
+    receipt_products = db.relationship(
+        'ReceiptProducts', back_populates='product')
 
     def __repr__(self):
         return self.name.title()
+
+
+class Customer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), nullable=False)
+    receipts = db.relationship('Receipt', back_populates='customer')
+
+
+class Receipt(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    datetime = db.Column(db.DateTime, nullable=False)
+    total_cost = db.Column(db.String, nullable=False)
+    customer_id = db.Column(db.Integer, ForeignKey('customer.id'))
+    customer = db.relationship('Customer', back_populates='receipts')
+    receipt_products = db.relationship(
+        'ReceiptProducts', back_populates='receipt')
+
+
+class ReceiptProducts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, ForeignKey('product.id'))
+    product = db.relationship('Product', back_populates='receipt_products')
+    price = db.Column(db.String, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    receipt_id = db.Column(db.Integer, ForeignKey('receipt.id'))
+    receipt = db.relationship('Receipt', back_populates='receipt_products')

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+{% set total_cost = 0 %}
+{% for receipt_product in receipt.receipt_products %}
+<article class="media rounded content-section my-2">
+    <div class="media-body">
+        <div class="article-metadata no-overflow">
+            <span class="font-weight-bold">${{ receipt_product.price }} each</span>
+            <span class="font-weight-bold float-right">Quantity: {{ receipt_product.quantity }}</span>
+        </div>
+        <h2 class="article-title">{{ receipt_product.product.name | title }}</h2>
+        <div>
+            <span class="font-weight-bold float-right">${{ receipt_product.price| float * receipt_product.quantity }}</span>
+        </div>
+    </div>
+</article>
+{% endfor %}
+<h3 class="float-right">Total Cost: ${{ receipt.total_cost }}</h3>
+{% endblock content %}

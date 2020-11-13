@@ -1,17 +1,17 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, HiddenField
 from wtforms.validators import DataRequired, ValidationError
-from nuts_and_bolts.models import Products
+from nuts_and_bolts.models import Product
 from nuts_and_bolts import db
 
 
 def check_name(form, field):
-    product = db.session.query(Products).filter_by(id=form.id.data).first()
+    product = db.session.query(Product).filter_by(id=form.id.data).first()
     if product:
-        if product.name != field.data and db.session.query(Products.name).filter_by(name=field.data).scalar() is not None:
+        if product.name != field.data and db.session.query(Product.name).filter_by(name=field.data).scalar() is not None:
             raise ValidationError('Name must be unique')
     else:
-        if db.session.query(Products.name).filter_by(name=field.data).scalar() is not None:
+        if db.session.query(Product.name).filter_by(name=field.data).scalar() is not None:
             raise ValidationError('Name must be unique')
 
 
@@ -19,12 +19,12 @@ def check_sku(form, field):
     if len(field.data) != 9:
         raise ValidationError(
             'SKU must be 9 digits long and not start with 0.')
-    product = db.session.query(Products).filter_by(id=form.id.data).first()
+    product = db.session.query(Product).filter_by(id=form.id.data).first()
     if product:
-        if str(product.sku) != field.data and db.session.query(Products.sku).filter_by(sku=field.data).scalar() is not None:
+        if str(product.sku) != field.data and db.session.query(Product.sku).filter_by(sku=field.data).scalar() is not None:
             raise ValidationError('SKU must be unique.')
     else:
-        if db.session.query(Products.sku).filter_by(sku=field.data).scalar() is not None:
+        if db.session.query(Product.sku).filter_by(sku=field.data).scalar() is not None:
             raise ValidationError('SKU must be unique.')
 
 

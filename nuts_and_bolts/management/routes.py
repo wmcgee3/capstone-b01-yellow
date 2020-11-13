@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required
 from nuts_and_bolts.management.forms import InventoryForm
-from nuts_and_bolts.models import Products
+from nuts_and_bolts.models import Product
 from nuts_and_bolts import db
 
 management = Blueprint('management', __name__)
@@ -12,7 +12,7 @@ management = Blueprint('management', __name__)
 def add_to_inventory():
     form = InventoryForm()
     if form.validate_on_submit():
-        new_product = Products(
+        new_product = Product(
             name=form.name.data,
             description=form.description.data,
             price=form.price.data,
@@ -30,7 +30,7 @@ def add_to_inventory():
 @management.route('/management/update_inventory/<int:product_id>',  methods=['GET', 'POST'])
 @login_required
 def update_inventory(product_id):
-    product = Products.query.get_or_404(product_id)
+    product = Product.query.get_or_404(product_id)
     form = InventoryForm()
     if request.method == 'POST':
         if form.validate_on_submit():

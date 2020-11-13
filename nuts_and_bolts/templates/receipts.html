@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if receipts %}
+{% for receipt in receipts %}
+<a class="text-decoration-none" href="{{ url_for('receipts.receipt', receipt_id=receipt.id) }}">
+    <article class="media rounded content-section my-2">
+        <div class="media-body">
+            <div class="article-metadata no-overflow">
+                <span class="font-weight-bold">Date ordered: {{ receipt.datetime.strftime('%m/%d/%Y') }}</span>
+            </div>    
+            <span class="font-weight-bold">{{ receipt.receipt_products | count }} products</span>
+            <span class="font-weight-bold float-right">Total: ${{ receipt.total_cost }}</span>
+        </div>
+    </article>
+</a>
+{% endfor %}
+{% else %}
+<div class="content-section col-md-8 mx-auto">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Find my previous orders</legend>
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.search(class="btn btn-outline-dark w-100") }}
+        </div>
+    </form>
+</div>
+{% endif %}
+{% endblock content %}

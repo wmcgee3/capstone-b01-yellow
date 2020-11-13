@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, flash, session, abort, r
 
 from flask.helpers import url_for
 from nuts_and_bolts import db
-from nuts_and_bolts.models import Products
+from nuts_and_bolts.models import Product
 
 main = Blueprint('main', __name__)
 
@@ -19,7 +19,7 @@ def contact_us():
 
 @main.route('/product_list')
 def product_list():
-    products = db.session.query(Products).order_by(Products.sku)
+    products = db.session.query(Product).order_by(Product.sku)
     return render_template('product_list.html', products=products)
 
 
@@ -32,8 +32,8 @@ def faq():
 def show_cart():
     cart = {}
     if session['cart']:
-        products = db.session.query(Products).filter(
-            Products.id.in_(session['cart']))
+        products = db.session.query(Product).filter(
+            Product.id.in_(session['cart']))
         for product in products:
             cart[str(product.id)] = {
                 "name": product.name,
@@ -46,7 +46,7 @@ def show_cart():
 
 @main.route('/add_to_cart/<string:id>')
 def add_to_cart(id):
-    product = db.session.query(Products).filter_by(id=id).first()
+    product = db.session.query(Product).filter_by(id=id).first()
     if product:
         if id in session['cart']:
             if session['cart'][id] + 1 <= product.quantity:
@@ -65,8 +65,7 @@ def add_to_cart(id):
                       ' to cart. That product is not currently available', 'danger')
     else:
         flash('Unable to add to cart. That product does not exist.', 'danger')
-    return redirect(url_for('main.show_cart'))
-
+    return redirect(url_for('cart.show_cart'))
 
 
 @main.route('/clear_cart')
@@ -76,37 +75,10 @@ def clear_cart():
     return redirect(url_for('main.home'))
 
 
-@main.route('/checkout')
-def checkout():
-    errors = []
-    products = db.session.query(Products).filter(
-        Products.id.in_(session['cart']))
-    for id in session['cart'].keys():
-        for product in products:
-            if product.id == int(id):
-                if product.quantity < session['cart'][id]:
-                    errors.add(product.name)
-
-    if errors:
-        message = errors.join(', ')
-        flash('Error. In stock quantity of ' + message +
-              ' less than amount in cart. Amounts in cart have been adjusted to current stock.', 'danger')
-        return redirect(url_for('main.show_cart'))
-    else:
-        for id in session['cart'].keys():
-            for product in products:
-                if product.id == int(id):
-                    product.quantity -= session['cart'][id]
-        db.session.commit()
-        session['cart'] = {}
-        flash('Products purchased successfully.', 'success')
-        return redirect(url_for('main.home'))
-
-
 @main.route('/search', methods=['GET', 'POST'])
 def search():
     search = request.form['search']
-    products = db.session.query(Products).filter(Products.name.contains(search))
+    products = db.session.query(Product).filter(Product.name.contains(search))
     return render_template('search.html', search=search, products=products)
 
 
@@ -114,7 +86,7 @@ def search():
 def remove_item(id):
     if id in session['cart']:
         session['cart'].pop(id, None)
-        product = db.session.query(Products).filter_by(id=id).first()
+        product = db.session.query(Product).filter_by(id=id).first()
         flash(product.name + 'has been removed from cart!', 'success')
         return redirect(url_for('main.show_cart'))
     else:
