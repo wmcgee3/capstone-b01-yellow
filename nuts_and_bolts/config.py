@@ -3,7 +3,7 @@ import os
 
 
 class Config:
-    SECRET_KEY = os.environ.get('NAB_KEY')
+    SECRET_KEY = str(os.environ.get('NAB_KEY'))
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
