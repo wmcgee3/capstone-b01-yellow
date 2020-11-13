@@ -2,9 +2,17 @@
 {% block content %}
 {% if receipts %}
 {% for receipt in receipts %}
-<div>
-    <a href="{{ url_for('receipts.receipt', receipt_id=receipt.id) }}">{{ receipt.datetime }}</a>
-</div>
+<a class="text-decoration-none" href="{{ url_for('receipts.receipt', receipt_id=receipt.id) }}">
+    <article class="media rounded content-section my-2">
+        <div class="media-body">
+            <div class="article-metadata no-overflow">
+                <span class="font-weight-bold">Date ordered: {{ receipt.datetime.strftime('%m/%d/%Y') }}</span>
+            </div>    
+            <span class="font-weight-bold">{{ receipt.receipt_products | count }} products</span>
+            <span class="font-weight-bold float-right">Total: ${{ receipt.total_cost }}</span>
+        </div>
+    </article>
+</a>
 {% endfor %}
 {% else %}
 <div class="content-section col-md-8 mx-auto">

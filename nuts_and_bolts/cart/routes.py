@@ -1,8 +1,9 @@
 from nuts_and_bolts.cart.forms import CartForm
 from flask import Blueprint, render_template, session, url_for, flash, redirect
 from nuts_and_bolts import db
-from nuts_and_bolts.models import Product, Customer, Receipt
+from nuts_and_bolts.models import Product, Customer, Receipt, ReceiptProducts
 from datetime import datetime
+from decimal import Decimal
 
 cart = Blueprint('cart', __name__)
 
@@ -33,14 +34,25 @@ def show_cart():
                     )
                     customer = new_customer
                 session['email'] = customer.email
+                total_cost = 0
                 for product in products:
-                    product.quantity -= session['cart'][str(product.id)]
-                    session['cart'].pop(str(product.id))
+                    total_cost += Decimal(product.price)
                 new_receipt = Receipt(
                     customer=customer,
-                    products=products,
+                    total_cost=str(total_cost),
                     datetime=datetime.utcnow()
                 )
+                for product in products:
+                    product.quantity -= session['cart'][str(product.id)]
+                    new_receipt_product = ReceiptProducts(
+                        product=product,
+                        price=product.price,
+                        quantity=session['cart'][str(product.id)],
+                        receipt=new_receipt
+                    )
+                    db.session.add(new_receipt_product)
+                    db.session.commit()
+                    session['cart'].pop(str(product.id))
                 db.session.add(new_receipt)
                 db.session.commit()
                 flash('Thank you for shopping with Nuts & Bolts!', 'success')
