@@ -12,11 +12,12 @@ def home():
     return render_template('home.html')
 
 
-@main.route('/contact_us', methods=('GET', 'POST'))
+@main.route('/contact_us', methods=['GET', 'POST'])
 def contact_us():
     form = QuestionsForm()
     if form.validate_on_submit():
-        return redirect(url_for('contact_us.html'))
+        flash(f'Question submitted!')
+        return redirect('/success')
     return render_template('contact_us.html', form=form)
 
 
