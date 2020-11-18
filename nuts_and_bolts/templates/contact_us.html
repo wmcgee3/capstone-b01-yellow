@@ -14,6 +14,19 @@
   <h2 class="mt-5">Location</h2>
   <p>If you wish to connect with us in person, our store is located at 6754 Nuts&Bolts Drive, Columbus, OH 43228 United
     States.</p>
+
+  <h2 class="mt-5"> Got a Question? </h2>
+  <p> Fill out the form below and we will get back to you as soon as possible!</p>
+
+  <div class="content-section col-md-8 mx-auto">
+    <form method="POST" action="/">
+      <div class="form-field">{{ form.subject.label }} {{form.subject}}</div>
+      <div class="form-field">{{ form.text.label }} {{form.text }}</div>
+      <div class="form-field">{{ form.email.label }} {{form.email }}</div>
+      {{ form.submit }}
+    </form>
+  </div>
+
 </div>
 
 {% endblock content %}

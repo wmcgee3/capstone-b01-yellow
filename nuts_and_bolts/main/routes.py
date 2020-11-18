@@ -1,20 +1,23 @@
-from flask import Blueprint, render_template, redirect, flash, session, abort, request
-
+from flask import Blueprint, render_template, redirect, flash, session, abort, request, url_for
+from .forms import QuestionsForm
 from flask.helpers import url_for
 from nuts_and_bolts import db
 from nuts_and_bolts.models import Product
+from nuts_and_bolts.main.forms import QuestionsForm
 
 main = Blueprint('main', __name__)
-
 
 @main.route('/')
 def home():
     return render_template('home.html')
 
 
-@main.route('/contact_us')
+@main.route('/contact_us', methods=('GET', 'POST'))
 def contact_us():
-    return render_template('contact_us.html')
+    form = QuestionsForm()
+    if form.validate_on_submit():
+        return redirect(url_for('contact_us.html'))
+    return render_template('contact_us.html', form=form)
 
 
 @main.route('/product_list')
