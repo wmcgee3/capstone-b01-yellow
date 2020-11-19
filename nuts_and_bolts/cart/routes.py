@@ -5,6 +5,7 @@ from nuts_and_bolts.models import Product, Customer, Receipt, ReceiptProducts
 from datetime import datetime
 from decimal import Decimal
 from flask_mail import Message
+from nuts_and_bolts.config import Config
 
 cart = Blueprint('cart', __name__)
 
@@ -56,16 +57,16 @@ def show_cart():
                     session['cart'].pop(str(product.id))
                 db.session.add(new_receipt)
                 db.session.commit()
-                msg = Message('Nuts and Bolts Transaction ID: ' + new_receipt.id,
-                    sender='noreply.nutsandboltshardware@gmail.com',
-                    recipients= customer.email,
-                    bcc=['noreply.nutsandboltshardware@gmail.com'])
-                msg.body = f''' Your transaction {new_receipt.id} went through!
+                msg = Message('Nuts and Bolts Transaction ID: ' + str(new_receipt.id),
+                    sender=Config.MAIL_USERNAME,
+                    recipients= [customer.email],
+                    bcc=[Config.MAIL_USERNAME])
+                msg.body = f''' Your transaction, ID #{str(new_receipt.id)} went through!
 
-                The total cost was: ${new_receipt.total_cost}
+        The total cost was: ${str(new_receipt.total_cost)}
 
-                Thank you for shopping with us!
-                - Nuts and Bolts Staff
+        Thank you for shopping with us!
+        - Nuts and Bolts Staff
                 '''
                 mail.send(msg)               
                 flash('Thank you for shopping with Nuts & Bolts! Your receipt was sent to your Email address', 'success')
