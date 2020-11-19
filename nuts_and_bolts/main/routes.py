@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, redirect, flash, session, abort, request, url_for
-from .forms import QuestionsForm
 from flask.helpers import url_for
 from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product
