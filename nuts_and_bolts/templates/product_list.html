@@ -5,7 +5,7 @@
 </div>
 {% if products %}
 {% for product in products %}
-<a href="{{ url_for('products.product_page', product_sku=product.sku) }}">
+<a href="{{ url_for('products.product_page', product_sku=product.sku) }}" class="text-decoration-none text-dark">
     <article class="media rounded content-section my-2">
         <div class="media-body">
             <div class="article-metadata no-overflow">
