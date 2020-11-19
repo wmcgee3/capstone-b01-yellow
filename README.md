@@ -1,3 +1,11 @@
+# About this project
+This is a project for a Columbus State Community College Computer Science Capstone class<br />
+This project was completed during Autumn Semester 2020<br />
+<br />
+The purpose of this project was to practice Agile/Scrum methodology while developing a website for a hypothetical company<br />
+Any resemblance to a real company is purely coincidental
+
+
 ## Using this app locally
 
 Make sure you have **Python 3.8.2**<br />
