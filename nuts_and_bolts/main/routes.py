@@ -37,39 +37,9 @@ Thank you.
     return render_template('contact_us.html', form=form)
 
 
-@main.route('/product_list')
-def product_list():
-    products = db.session.query(Product).order_by(Product.sku)
-    return render_template('product_list.html', products=products)
-
-
 @main.route('/faq')
 def faq():
     return render_template('faq.html')
-
-
-@main.route('/add_to_cart/<string:id>')
-def add_to_cart(id):
-    product = db.session.query(Product).filter_by(id=id).first()
-    if product:
-        if id in session['cart']:
-            if session['cart'][id] + 1 <= product.quantity:
-                session['cart'][id] = session['cart'][id] + 1
-                flash(product.name + ' added to cart!', 'success')
-            else:
-                session['cart'][id] = product.quantity
-                flash('Unable to add ' + product.name + ' to cart. There are only ' +
-                      str(product.quantity) + ' left in stock.', 'danger')
-        else:
-            if product.quantity >= 1:
-                session['cart'][id] = 1
-                flash(product.name + ' added to cart!', 'success')
-            else:
-                flash('Unable to add ' + product.name +
-                      ' to cart. That product is not currently available', 'danger')
-    else:
-        flash('Unable to add to cart. That product does not exist.', 'danger')
-    return redirect(url_for('cart.show_cart'))
 
 
 @main.route('/clear_cart')
