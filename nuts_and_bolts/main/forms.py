@@ -3,7 +3,9 @@ from wtforms import StringField, TextAreaField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email
 
 class QuestionsForm(FlaskForm):
-    subject = SelectField('Subject: ', choices=[('Order Status'), ('Order Cancelation'), ('Current Order'), ('Current Promotions'), ('Product Warranty'), ('Website Errors'), ('Other')])
+    subject = SelectField('Subject: ', choices=[('Order Status','Order Status'), ('Order Cancelation', 'Order Cancelation'),
+                             ('Current Order', 'Current Order'), ('Current Promotions', 'Current Promotions'), 
+                             ('Product Warranty','Product Warranty'), ('Website Errors', 'Website Errors'), ('Other', 'other')])
     text = TextAreaField('Enter text here: ', validators=[DataRequired()])
     email = StringField('Email: ', [
         Email(message=('Not a valid email address.')),

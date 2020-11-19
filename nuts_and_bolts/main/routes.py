@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, redirect, flash, session, abort, request, url_for
 from .forms import QuestionsForm
 from flask.helpers import url_for
-from nuts_and_bolts import db
+from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product
 from nuts_and_bolts.main.forms import QuestionsForm
+from flask_mail import Message
 
 main = Blueprint('main', __name__)
+
 
 @main.route('/')
 def home():
@@ -16,8 +18,23 @@ def home():
 def contact_us():
     form = QuestionsForm()
     if form.validate_on_submit():
-        flash(f'Question submitted!')
-        return redirect('/success')
+        msg = Message('Question about ' + form.subject.data + ' Sent',
+                      sender='noreply.nutsandboltshardware@gmail.com',
+                      recipients=[form.email.data],
+                      bcc=['noreply.nutsandboltshardware@gmail.com'])
+        msg.body = f''' Your question about {form.subject.data} has been sent to our staff!
+Your question was:
+
+{form.text.data}
+
+We will reach out in a few days after review.    
+Thank you.
+
+- Nuts and Bolts Staff
+'''
+        mail.send(msg)
+        flash(f'Question submitted! Check email for confirmation.', 'success')
+        return redirect(url_for('main.contact_us'))
     return render_template('contact_us.html', form=form)
 
 
