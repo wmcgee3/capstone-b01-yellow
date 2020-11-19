@@ -48,22 +48,6 @@ def faq():
     return render_template('faq.html')
 
 
-@main.route('/show_cart')
-def show_cart():
-    cart = {}
-    if session['cart']:
-        products = db.session.query(Product).filter(
-            Product.id.in_(session['cart']))
-        for product in products:
-            cart[str(product.id)] = {
-                "name": product.name,
-                "price": product.price,
-                "sku": product.sku,
-                "quantity": session['cart'][str(product.id)]
-            }
-    return render_template('show_cart.html', cart=cart)
-
-
 @main.route('/add_to_cart/<string:id>')
 def add_to_cart(id):
     product = db.session.query(Product).filter_by(id=id).first()
@@ -108,6 +92,6 @@ def remove_item(id):
         session['cart'].pop(id, None)
         product = db.session.query(Product).filter_by(id=id).first()
         flash(product.name + 'has been removed from cart!', 'success')
-        return redirect(url_for('main.show_cart'))
+        return redirect(url_for('cart.show_cart'))
     else:
         abort(404)
