@@ -42,6 +42,7 @@ def create_app(config_class=Config):
         from nuts_and_bolts.main.routes import main
         from nuts_and_bolts.errors.handlers import errors
         from nuts_and_bolts.management.routes import management
+        from nuts_and_bolts.products.routes import products
         from nuts_and_bolts.receipts.routes import receipts
 
         app.register_blueprint(auth)
@@ -49,6 +50,7 @@ def create_app(config_class=Config):
         app.register_blueprint(main)
         app.register_blueprint(errors)
         app.register_blueprint(management)
+        app.register_blueprint(products)
         app.register_blueprint(receipts)
 
         return app
