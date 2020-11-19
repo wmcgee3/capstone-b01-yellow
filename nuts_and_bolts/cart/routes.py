@@ -56,7 +56,7 @@ def show_cart():
                 db.session.add(new_receipt)
                 db.session.commit()
                 flash('Thank you for shopping with Nuts & Bolts!', 'success')
-                return redirect(url_for('main.product_list'))
+                return redirect(url_for('products.product_list'))
             else:
                 flash('Please enter an email address to checkout.', 'warning')
                 return redirect(url_for('cart.show_cart'))
