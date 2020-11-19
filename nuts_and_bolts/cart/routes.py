@@ -1,9 +1,10 @@
 from nuts_and_bolts.cart.forms import CartForm
 from flask import Blueprint, render_template, session, url_for, flash, redirect
-from nuts_and_bolts import db
+from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product, Customer, Receipt, ReceiptProducts
 from datetime import datetime
 from decimal import Decimal
+from flask_mail import Message
 
 cart = Blueprint('cart', __name__)
 
@@ -55,7 +56,19 @@ def show_cart():
                     session['cart'].pop(str(product.id))
                 db.session.add(new_receipt)
                 db.session.commit()
-                flash('Thank you for shopping with Nuts & Bolts!', 'success')
+                msg = Message('Nuts and Bolts Transaction ID: ' + new_receipt.id,
+                    sender='noreply.nutsandboltshardware@gmail.com',
+                    recipients= customer.email,
+                    bcc=['noreply.nutsandboltshardware@gmail.com'])
+                msg.body = f''' Your transaction {new_receipt.id} went through!
+
+                The total cost was: ${new_receipt.total_cost}
+
+                Thank you for shopping with us!
+                - Nuts and Bolts Staff
+                '''
+                mail.send(msg)               
+                flash('Thank you for shopping with Nuts & Bolts! Your receipt was sent to your Email address', 'success')
                 return redirect(url_for('main.product_list'))
             else:
                 flash('Please enter an email address to checkout.', 'warning')
