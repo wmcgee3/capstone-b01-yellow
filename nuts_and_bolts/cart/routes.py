@@ -74,7 +74,7 @@ Thank you for shopping with us!
 '''
                 mail.send(msg)               
                 flash('Thank you for shopping with Nuts & Bolts! Your receipt was sent to your Email address', 'success')
-                return redirect(url_for('main.product_list'))
+                return redirect(url_for('products.product_list'))
             else:
                 flash('Please enter an email address to checkout.', 'warning')
                 return redirect(url_for('cart.show_cart'))
