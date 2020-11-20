@@ -4,7 +4,7 @@ from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product
 from nuts_and_bolts.main.forms import QuestionsForm
 from flask_mail import Message
-from nuts_and_bolts.config import Congfig
+from nuts_and_bolts.config import Config
 
 main = Blueprint('main', __name__)
 
