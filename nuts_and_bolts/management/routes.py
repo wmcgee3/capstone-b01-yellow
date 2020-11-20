@@ -22,7 +22,7 @@ def add_to_inventory():
         db.session.add(new_product)
         db.session.commit()
         flash(f'Entry created for {form.name.data}!', 'success')
-        return redirect(url_for('main.product_list'))
+        return redirect(url_for('products.product_list'))
     form.submit.label.text = 'Add'
     return render_template('add_to_inventory.html', form=form)
 
@@ -41,7 +41,7 @@ def update_inventory(product_id):
             product.quantity = int(form.quantity.data)
             db.session.commit()
             flash(f'Entry updated for ' + form.name.data + '!', 'success')
-            return redirect(url_for('main.product_list'))
+            return redirect(url_for('products.product_list'))
         else:
             return render_template('update_inventory.html', form=form)
     form.id.data = product.id

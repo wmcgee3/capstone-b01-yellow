@@ -5,28 +5,23 @@
 </div>
 {% if products %}
 {% for product in products %}
-<article class="media rounded content-section my-2">
-    <div class="media-body">
-        <div class="article-metadata no-overflow">
-            <span class="font-weight-bold">${{ product.price }}</span>
-            <span class="font-weight-bold float-right">SKU: {{ product.sku }}</span>
+<a href="{{ url_for('products.product_page', product_sku=product.sku) }}" class="text-decoration-none text-dark">
+    <article class="media rounded content-section my-2">
+        <div class="media-body">
+            <div class="article-metadata no-overflow">
+                <span class="font-weight-bold">${{ product.price }}</span>
+                <span class="font-weight-bold float-right">SKU: {{ product.sku }}</span>
+            </div>
+            <h2 class="article-title">{{ product.name | title }}</h2>
+            <p class="article-content text-wrap-word-break">{{ product.description }}</p>
+            <div>
+                {%- if product.quantity == 0 -%}
+                <b class="text-danger"> OUT OF STOCK!</b>
+                {%- endif -%}
+            </div>
         </div>
-        <h2 class="article-title">{{ product.name | title }}</h2>
-        <p class="article-content text-wrap-word-break">{{ product.description }}</p>
-        <div>
-            {%- if current_user.is_authenticated -%}
-            <a class="btn btn-secondary btn-sm mt-2"
-                href="{{ url_for('management.update_inventory', product_id=product.id) }}" role="button">Update</a>
-            {%- endif -%}
-            {%- if product.quantity == 0 -%}
-            <b class="text-danger"> OUT OF STOCK!</b>
-            {%- endif -%}
-            <form action="{{ url_for('main.add_to_cart', id=product.id) }}" class="d-inline">
-                <input type="submit" value="Add to cart" class="btn-sm btn-primary float-right">
-            </form>
-        </div>
-    </div>
-</article>
+    </article>
+</a>
 {% endfor %}
 {% else %}
 <h2 class="text-center">Uh-oh, it looks like there aren't any products to display.</h2>
