@@ -38,12 +38,13 @@ def show_cart():
                 session['email'] = customer.email
                 total_cost = 0
                 for product in products:
-                    total_cost += Decimal(product.price)
+                    total_cost += (Decimal(product.price) * Decimal(session['cart'][str(product.id)]))
                 new_receipt = Receipt(
                     customer=customer,
                     total_cost=str(total_cost),
                     datetime=datetime.utcnow()
                 )
+                items = ''''''
                 for product in products:
                     product.quantity -= session['cart'][str(product.id)]
                     new_receipt_product = ReceiptProducts(
@@ -54,20 +55,23 @@ def show_cart():
                     )
                     db.session.add(new_receipt_product)
                     db.session.commit()
+                    items += f'''{new_receipt_product.product.name}
+    {new_receipt_product.price} each, Quantity: {new_receipt_product.quantity}
+'''
                     session['cart'].pop(str(product.id))
                 db.session.add(new_receipt)
                 db.session.commit()
                 msg = Message('Nuts and Bolts Transaction ID: ' + str(new_receipt.id),
                     sender=Config.MAIL_USERNAME,
-                    recipients= [customer.email],
-                    bcc=[Config.MAIL_USERNAME])
-                msg.body = f''' Your transaction, ID #{str(new_receipt.id)} went through!
+                    recipients= [customer.email])
+                msg.body = f'''Transaction ID #{str(new_receipt.id)} was successful!
 
-        The total cost was: ${str(new_receipt.total_cost)}
+    {items}
+The total cost was: ${str(new_receipt.total_cost)}
 
-        Thank you for shopping with us!
-        - Nuts and Bolts Staff
-                '''
+Thank you for shopping with us!
+- Nuts and Bolts Staff
+'''
                 mail.send(msg)               
                 flash('Thank you for shopping with Nuts & Bolts! Your receipt was sent to your Email address', 'success')
                 return redirect(url_for('main.product_list'))
