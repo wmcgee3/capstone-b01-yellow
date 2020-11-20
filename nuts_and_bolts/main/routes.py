@@ -4,6 +4,7 @@ from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product
 from nuts_and_bolts.main.forms import QuestionsForm
 from flask_mail import Message
+from nuts_and_bolts.config import Congfig
 
 main = Blueprint('main', __name__)
 
@@ -18,9 +19,9 @@ def contact_us():
     form = QuestionsForm()
     if form.validate_on_submit():
         msg = Message('Question about ' + form.subject.data + ' Sent',
-                      sender='noreply.nutsandboltshardware@gmail.com',
+                      sender=Config.MAIL_USERNAME,
                       recipients=[form.email.data],
-                      bcc=['noreply.nutsandboltshardware@gmail.com'])
+                      bcc=[Config.MAIL_USERNAME])
         msg.body = f''' Your question about {form.subject.data} has been sent to our staff!
 Your question was:
 
