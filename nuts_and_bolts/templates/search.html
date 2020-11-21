@@ -3,7 +3,7 @@
 <div class="my-5">
     <h1 class="text-center">Search Results</h1>
 </div>
-{% if products.count() > 0 %}
+{% if products %}
 {% for product in products %}
 <a href="{{ url_for('products.product_page', product_sku=product.sku) }}" class="text-decoration-none text-dark">
     <article class="media rounded content-section my-2">

@@ -52,8 +52,10 @@ def clear_cart():
 
 @main.route('/search', methods=['GET', 'POST'])
 def search():
+    products = []
     search = request.form['search']
-    products = db.session.query(Product).filter(Product.name.contains(search))
+    if search:
+        products = db.session.query(Product).filter(Product.name.contains(search))
     return render_template('search.html', search=search, products=products)
 
 
