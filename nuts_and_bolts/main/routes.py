@@ -43,13 +43,6 @@ def faq():
     return render_template('faq.html')
 
 
-@main.route('/clear_cart')
-def clear_cart():
-    session['cart'] = {}
-    flash('Your cart has been cleared!', 'success')
-    return redirect(url_for('main.home'))
-
-
 @main.route('/search', methods=['GET', 'POST'])
 def search():
     products = []
@@ -57,14 +50,3 @@ def search():
     if search:
         products = db.session.query(Product).filter(Product.name.contains(search))
     return render_template('search.html', search=search, products=products)
-
-
-@main.route('/remove_item/<id>')
-def remove_item(id):
-    if id in session['cart']:
-        session['cart'].pop(id, None)
-        product = db.session.query(Product).filter_by(id=id).first()
-        flash(product.name + 'has been removed from cart!', 'success')
-        return redirect(url_for('cart.show_cart'))
-    else:
-        abort(404)
