@@ -13,7 +13,7 @@
         </div>
         <h2 class="article-title">{{ cart[key]['name'] | title }}</h2>
         <p class="font-weight-bold float-right">Quantity: {{ cart[key]['quantity'] }}</p>
-        <a class="btn btn-outline-danger btn-sm" href="{{ url_for('main.remove_item', id=key) }}">Remove Item</a>
+        <a class="btn btn-outline-danger btn-sm" href="{{ url_for('cart.remove_item', id=key) }}">Remove Item</a>
     </div>
 </article>
 {% endfor %}
@@ -33,8 +33,8 @@
             {{ form.email(class="form-control form-control-lg") }}
             {% endif %}
         </div>
-        {{ form.clear_cart(class="btn btn-sm btn-danger") }}
-        {{ form.checkout(class="btn btn-secondary btn-sm float-right") }}
+        <a href="{{ url_for('cart.clear_cart') }}" class="btn btn-outline-danger">Clear Cart</a>
+        {{ form.checkout(class="btn btn-secondary float-right") }}
     </div>
 </form>
 {% else %}

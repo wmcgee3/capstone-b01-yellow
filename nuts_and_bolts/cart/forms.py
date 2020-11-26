@@ -8,4 +8,3 @@ class CartForm(FlaskForm):
         Email(message=('Not a valid email address.')),
         DataRequired()])
     checkout = SubmitField('Checkout')
-    clear_cart = SubmitField('Clear Cart')

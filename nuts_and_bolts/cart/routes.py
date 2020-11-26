@@ -1,5 +1,5 @@
 from nuts_and_bolts.cart.forms import CartForm
-from flask import Blueprint, render_template, session, url_for, flash, redirect
+from flask import Blueprint, render_template, session, url_for, flash, redirect, abort
 from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product, Customer, Receipt, ReceiptProducts
 from datetime import datetime
@@ -14,9 +14,6 @@ cart = Blueprint('cart', __name__)
 def show_cart():
     form = CartForm()
     if form.validate_on_submit():
-        if form.clear_cart.data:
-            session['cart'] = {}
-            flash('Your cart has been cleared.', 'success')
         if form.checkout.data:
             products = db.session.query(Product).filter(
                 Product.id.in_(session['cart'])).all()
@@ -90,3 +87,21 @@ Thank you for shopping with us!
                 "quantity": session['cart'][str(product.id)]
             }
     return render_template('show_cart.html', cart=cart, form=form)
+
+@cart.route('/cart/clear')
+def clear_cart():
+    if 'cart' in session:
+        session['cart'] = {}
+        flash('Your cart has been cleared.', 'success')
+    return redirect(url_for('cart.show_cart'))
+
+
+@cart.route('/cart/remove_item/<id>')
+def remove_item(id):
+    if id in session['cart']:
+        session['cart'].pop(id, None)
+        product = db.session.query(Product).filter_by(id=id).first()
+        flash(product.name + 'has been removed from cart!', 'success')
+        return redirect(url_for('cart.show_cart'))
+    else:
+        abort(404)
