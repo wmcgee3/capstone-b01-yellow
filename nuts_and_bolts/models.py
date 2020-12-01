@@ -11,7 +11,7 @@ def load_user(user_id):
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
+    password = db.Column(db.String(60), nullable=True)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
     receipts = db.relationship('Receipt', back_populates='user')
 
