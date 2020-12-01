@@ -1,7 +1,7 @@
 from nuts_and_bolts.cart.forms import CartForm
 from flask import Blueprint, render_template, session, url_for, flash, redirect, abort
 from nuts_and_bolts import db, mail
-from nuts_and_bolts.models import Product, Customer, Receipt, ReceiptProducts
+from nuts_and_bolts.models import Product, User, Receipt, ReceiptProducts
 from datetime import datetime
 from decimal import Decimal
 from flask_mail import Message
@@ -26,9 +26,9 @@ def show_cart():
                 flash('The following products are in limited supply: ' + ', '.join(understocked_products) + '. The quantities in your cart have been adjusted.', 'danger')
                 return redirect(url_for('cart.show_cart'))
             if form.email.data:
-                customer = Customer.query.filter_by(email=form.email.data).first()
+                customer = User.query.filter_by(email=form.email.data).first()
                 if not customer:
-                    new_customer = Customer(
+                    new_customer = User(
                         email=form.email.data
                     )
                     customer = new_customer
