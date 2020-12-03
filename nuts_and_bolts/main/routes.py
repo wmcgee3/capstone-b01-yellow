@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, flash, session, abort, request, url_for
 from flask.helpers import url_for
 from nuts_and_bolts import db, mail
-from nuts_and_bolts.models import Product
-from nuts_and_bolts.main.forms import QuestionsForm
+from nuts_and_bolts.models import Product, Testimonial
+from nuts_and_bolts.main.forms import QuestionsForm, TestimonialForm
 from flask_mail import Message
 from nuts_and_bolts.config import Config
 
@@ -50,3 +50,19 @@ def search():
     if search:
         products = db.session.query(Product).filter(Product.name.contains(search))
     return render_template('search.html', search=search, products=products)
+
+@main.route('/testimonials', methods=['GET', 'POST'])
+def testimonials():
+    testimonial_list = db.session.query(Testimonial).order_by(Testimonial.name)
+    form = TestimonialForm()
+    if form.validate_on_submit():
+        new_testimonial = Testimonial(
+            name=form.name.data,
+            text=form.text.data
+        )
+        db.session.add(new_testimonial)
+        db.session.commit()
+        flash(f'Entry created for {form.name.data}!', 'success')
+        return redirect(url_for('main.testimonials'))
+    form.submit.label.text = 'Add Testimonial'
+    return render_template('testimonials.html', form=form, testimonial_list=testimonial_list)
