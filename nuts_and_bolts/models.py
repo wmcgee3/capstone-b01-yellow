@@ -48,3 +48,9 @@ class ReceiptProducts(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     receipt_id = db.Column(db.Integer, ForeignKey('receipt.id'))
     receipt = db.relationship('Receipt', back_populates='receipt_products')
+
+
+class Testimonial(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    text = db.Column(db.Text, nullable=False)
