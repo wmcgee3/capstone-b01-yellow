@@ -10,14 +10,14 @@ db.create_all(app=create_app())
 
 def populate_user():
     manager = User(
-        email = 'manager@nutsandbolts.com',
+        email = 'manager.nutsandbolts@gmail.com',
         password = bcrypt.generate_password_hash('B01Yellow!!').decode('utf-8'),
         is_admin = True
     )
 
     customer = User(
-        email = 'customer@nutsandbolts.com',
-        password = bcrypt.generate_password_hash('Testing').decode('utf-8')
+        email = 'customer.nutsandbolts@gmail.com',
+        password = bcrypt.generate_password_hash('B01Yellow!!').decode('utf-8')
     )
 
     db.session.add(manager)
