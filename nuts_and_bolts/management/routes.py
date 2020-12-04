@@ -3,12 +3,14 @@ from flask_login import login_required
 from nuts_and_bolts.management.forms import InventoryForm
 from nuts_and_bolts.models import Product
 from nuts_and_bolts import db
+from nuts_and_bolts.shared.utils import admin_required
 
 management = Blueprint('management', __name__)
 
 
 @management.route('/management/add_to_inventory', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def add_to_inventory():
     form = InventoryForm()
     if form.validate_on_submit():
@@ -29,6 +31,7 @@ def add_to_inventory():
 
 @management.route('/management/update_inventory/<int:product_id>',  methods=['GET', 'POST'])
 @login_required
+@admin_required
 def update_inventory(product_id):
     product = Product.query.get_or_404(product_id)
     form = InventoryForm()

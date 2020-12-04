@@ -1,5 +1,5 @@
 from nuts_and_bolts.receipts.forms import FindOrdersForm
-from nuts_and_bolts.models import Customer, Receipt
+from nuts_and_bolts.models import User, Receipt
 from flask import Blueprint, render_template, url_for, redirect, flash, session
 
 receipts = Blueprint('receipts', __name__)
@@ -10,7 +10,7 @@ def all_receipts():
     receipts = []
     form = FindOrdersForm()
     if form.validate_on_submit():
-        customer = Customer.query.filter_by(email=form.email.data).first()
+        customer = User.query.filter_by(email=form.email.data).first()
         if customer:
             receipts = sorted(customer.receipts, key=lambda i: i.datetime, reverse=True)
         if not receipts:

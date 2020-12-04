@@ -11,7 +11,9 @@ def load_user(user_id):
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
+    password = db.Column(db.String(60), nullable=True)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    receipts = db.relationship('Receipt', back_populates='user')
 
 
 class Product(db.Model):
@@ -28,18 +30,12 @@ class Product(db.Model):
         return self.name.title()
 
 
-class Customer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), nullable=False)
-    receipts = db.relationship('Receipt', back_populates='customer')
-
-
 class Receipt(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     datetime = db.Column(db.DateTime, nullable=False)
     total_cost = db.Column(db.String, nullable=False)
-    customer_id = db.Column(db.Integer, ForeignKey('customer.id'))
-    customer = db.relationship('Customer', back_populates='receipts')
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    user = db.relationship('User', back_populates='receipts')
     receipt_products = db.relationship(
         'ReceiptProducts', back_populates='receipt')
 

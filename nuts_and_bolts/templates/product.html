@@ -9,7 +9,7 @@
         <h2 class="article-title">{{ product.name | title }}</h2>
         <p class="article-content text-wrap-word-break">{{ product.description }}</p>
         <div>
-            {%- if current_user.is_authenticated -%}
+            {%- if current_user.is_authenticated and current_user.is_admin -%}
             <a class="btn btn-secondary mt-2"
                 href="{{ url_for('management.update_inventory', product_id=product.id) }}">Update</a>
             {%- endif -%}

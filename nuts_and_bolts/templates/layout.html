@@ -41,7 +41,7 @@
             <a class="nav-item nav-link" href="{{ url_for('cart.show_cart') }}">Cart</a>
             <a class="nav-item nav-link" href="{{ url_for('receipts.all_receipts') }}">Receipts</a>
           </div>
-          {%- if current_user.is_authenticated -%}
+          {%- if current_user.is_authenticated and current_user.is_admin -%}
           <div class="navbar-nav ml-auto">
             <div class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkManageInventory"
