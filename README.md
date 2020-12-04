@@ -25,6 +25,11 @@ Open your web browser to "localhost:5000"<br />
 
 ## Login Info
 
-The example login credentials are:<br />
-- email: manager@nutsandbolts.com
-- password: B01Yellow!!
+Example login credentials:<br />
+<br />
+- Manager:
+  - email: manager.nutsandbolts@gmail.com
+  - password: B01Yellow!!
+- Customer:
+  - email: customer.nutsandbolts@gmail.com
+  - password: B01Yellow!!
