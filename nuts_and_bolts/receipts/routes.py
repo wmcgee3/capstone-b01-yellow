@@ -11,11 +11,9 @@ def all_receipts():
     receipts = []
     form = FindOrdersForm()
     if current_user.is_authenticated:
-        customer = User.query.filter_by(email=current_user.email).first()
-        if customer:
-            receipts = sorted(customer.receipts, key=lambda i: i.datetime, reverse=True)
+        receipts = sorted(current_user.receipts, key=lambda i: i.datetime, reverse=True)
         if not receipts:
-            flash('No receipts match that email address.', 'danger')
+            flash("You don't have any receipts.", 'danger')
     if form.validate_on_submit():
         customer = User.query.filter_by(email=form.email.data).first()
         if customer:
