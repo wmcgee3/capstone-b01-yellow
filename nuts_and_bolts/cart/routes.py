@@ -37,7 +37,7 @@ def show_cart():
                 for product in products:
                     total_cost += (Decimal(product.price) * Decimal(session['cart'][str(product.id)]))
                 new_receipt = Receipt(
-                    customer=customer,
+                    user=customer,
                     total_cost=str(total_cost),
                     datetime=datetime.utcnow()
                 )
