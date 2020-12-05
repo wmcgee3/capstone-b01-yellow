@@ -13,13 +13,18 @@
         </div>
         <h2 class="article-title">{{ cart[key]['name'] | title }}</h2>
         <p class="font-weight-bold float-right">Quantity: {{ cart[key]['quantity'] }}</p>
-        <a class="btn btn-outline-danger btn-sm" href="{{ url_for('cart.remove_item', id=key) }}">Remove Item</a>
+        <a class="btn btn-outline-danger" href="{{ url_for('cart.remove_item', id=key) }}">Remove Item</a>
     </div>
 </article>
 {% endfor %}
 <form action="" method="POST">
     {{ form.hidden_tag() }}
     <div class="mt-2">
+        {% if current_user.is_authenticated %}
+        <div class="d-none">
+            {{ form.email(value=current_user.email) }}
+        </div>
+        {% else %}
         <div class="form-group col-md-6 ml-auto">
             {{ form.email.label(class="form-control-label") }}
             {% if form.email.errors %}
@@ -33,6 +38,7 @@
             {{ form.email(class="form-control form-control-lg") }}
             {% endif %}
         </div>
+        {% endif %}
         <a href="{{ url_for('cart.clear_cart') }}" class="btn btn-outline-danger">Clear Cart</a>
         {{ form.checkout(class="btn btn-secondary float-right") }}
     </div>
