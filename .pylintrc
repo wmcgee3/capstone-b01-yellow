@@ -1,0 +1,11 @@
+[MASTER]
+
+disable=missing-module-docstring,
+        missing-class-docstring,
+        missing-function-docstring,
+        too-few-public-methods,
+        no-member,
+        no-else-return,
+        raise-missing-from,
+        import-outside-toplevel,
+        cyclic-import

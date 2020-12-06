@@ -16,16 +16,16 @@ mail = Mail()
 seeder = FlaskSeeder()
 try:
     logo = Image.open('static/images/logo.png')
-except:
+except FileNotFoundError:
     pass
 
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     @app.before_request
-    def initiate_session():
+    def initiate_session():         # pylint: disable=unused-variable
         if 'cart' not in session:
             session['cart'] = {}
         session.permanent = True
