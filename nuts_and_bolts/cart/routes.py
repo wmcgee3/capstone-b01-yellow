@@ -1,11 +1,11 @@
-from nuts_and_bolts.cart.forms import CartForm
-from flask import Blueprint, render_template, session, url_for, flash, redirect, abort
-from nuts_and_bolts import db, mail
-from nuts_and_bolts.models import Product, User, Receipt, ReceiptProducts
 from datetime import datetime
 from decimal import Decimal
+from flask import Blueprint, render_template, session, url_for, flash, redirect, abort
 from flask_mail import Message
 from nuts_and_bolts.config import Config
+from nuts_and_bolts.cart.forms import CartForm
+from nuts_and_bolts import db, mail
+from nuts_and_bolts.models import Product, User, Receipt, ReceiptProducts
 
 cart = Blueprint('cart', __name__)
 
@@ -23,7 +23,10 @@ def show_cart():
                     session['cart'][str(product.id)] = product.quantity
                     understocked_products.append(product.name)
             if understocked_products:
-                flash('The following products are in limited supply: ' + ', '.join(understocked_products) + '. The quantities in your cart have been adjusted.', 'danger')
+                flash('The following products are in limited supply: '
+                      + ', '.join(understocked_products) +
+                      '. The quantities in your cart have been adjusted.',
+                      'danger')
                 return redirect(url_for('cart.show_cart'))
             if form.email.data:
                 customer = User.query.filter_by(email=form.email.data).first()
@@ -35,7 +38,8 @@ def show_cart():
                 session['email'] = customer.email
                 total_cost = 0
                 for product in products:
-                    total_cost += (Decimal(product.price) * Decimal(session['cart'][str(product.id)]))
+                    total_cost += (Decimal(product.price) *
+                                   Decimal(session['cart'][str(product.id)]))
                 new_receipt = Receipt(
                     user=customer,
                     total_cost=str(total_cost),
@@ -59,8 +63,8 @@ def show_cart():
                 db.session.add(new_receipt)
                 db.session.commit()
                 msg = Message('Nuts and Bolts Transaction ID: ' + str(new_receipt.id),
-                    sender=Config.MAIL_USERNAME,
-                    recipients= [customer.email])
+                              sender=Config.MAIL_USERNAME,
+                              recipients=[customer.email])
                 msg.body = f'''Transaction ID #{str(new_receipt.id)} was successful!
 
     {items}
@@ -69,24 +73,27 @@ The total cost was: ${str(new_receipt.total_cost)}
 Thank you for shopping with us!
 - Nuts and Bolts Staff
 '''
-                mail.send(msg)               
-                flash('Thank you for shopping with Nuts & Bolts! Your receipt was sent to your Email address', 'success')
+                mail.send(msg)
+                flash('Thank you for shopping with Nuts & Bolts!'
+                      + 'Your receipt was sent to your Email address',
+                      'success')
                 return redirect(url_for('products.product_list'))
             else:
                 flash('Please enter an email address to checkout.', 'warning')
                 return redirect(url_for('cart.show_cart'))
-    cart = {}
+    _cart = {}
     if session['cart']:
         products = db.session.query(Product).filter(
             Product.id.in_(session['cart']))
         for product in products:
-            cart[str(product.id)] = {
+            _cart[str(product.id)] = {
                 "name": product.name,
                 "price": product.price,
                 "sku": product.sku,
                 "quantity": session['cart'][str(product.id)]
             }
-    return render_template('show_cart.html', cart=cart, form=form)
+    return render_template('show_cart.html', cart=_cart, form=form)
+
 
 @cart.route('/cart/clear')
 def clear_cart():
@@ -97,11 +104,11 @@ def clear_cart():
 
 
 @cart.route('/cart/remove_item/<id>')
-def remove_item(id):
-    if id in session['cart']:
-        session['cart'].pop(id, None)
-        product = db.session.query(Product).filter_by(id=id).first()
+def remove_item(_id):
+    if _id in session['cart']:
+        session['cart'].pop(_id, None)
+        product = db.session.query(Product).filter_by(id=_id).first()
         flash(product.name + 'has been removed from cart!', 'success')
         return redirect(url_for('cart.show_cart'))
     else:
-        abort(404)
+        return abort(404)

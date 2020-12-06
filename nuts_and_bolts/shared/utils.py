@@ -3,11 +3,11 @@ from flask import abort
 from flask_login import current_user
 
 
-def admin_required(f):
-    @wraps(f)
+def admin_required(func):
+    @wraps(func)
     def decorated_function(*args, **kwargs):
         if current_user.is_authenticated and current_user.is_admin:
-            return f(*args, **kwargs)
+            return func(*args, **kwargs)
         else:
-            abort(403)
+            return abort(403)
     return decorated_function

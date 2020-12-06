@@ -1,7 +1,3 @@
-from flask import url_for
-import os
-
-
 class Config:
     SECRET_KEY = 'c40ddf4b45354a813bde0de357274b8e'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'

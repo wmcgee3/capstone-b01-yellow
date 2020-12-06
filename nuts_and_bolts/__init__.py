@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_seeder import FlaskSeeder
-from nuts_and_bolts.config import Config
 from PIL import Image
+from nuts_and_bolts.config import Config
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()

@@ -8,7 +8,8 @@ from nuts_and_bolts import db
 def check_name(form, field):
     product = db.session.query(Product).filter_by(id=form.id.data).first()
     if product:
-        if product.name != field.data and db.session.query(Product.name).filter_by(name=field.data).scalar() is not None:
+        if (product.name != field.data and
+                db.session.query(Product.name).filter_by(name=field.data).scalar() is not None):
             raise ValidationError('Name must be unique')
     else:
         if db.session.query(Product.name).filter_by(name=field.data).scalar() is not None:
@@ -21,19 +22,20 @@ def check_sku(form, field):
             'SKU must be 9 digits long and not start with 0.')
     product = db.session.query(Product).filter_by(id=form.id.data).first()
     if product:
-        if str(product.sku) != field.data and db.session.query(Product.sku).filter_by(sku=field.data).scalar() is not None:
+        if (str(product.sku) != field.data and
+                db.session.query(Product.sku).filter_by(sku=field.data).scalar() is not None):
             raise ValidationError('SKU must be unique.')
     else:
         if db.session.query(Product.sku).filter_by(sku=field.data).scalar() is not None:
             raise ValidationError('SKU must be unique.')
 
 
-def check_price(form, field):
+def check_price(_, field):
     if '.' not in field.data or len(field.data.rsplit('.')[-1]) != 2:
         raise ValidationError('Price must have 2 decimal places.')
 
 
-def check_quantity(form, field):
+def check_quantity(_, field):
     try:
         int(field.data)
     except:

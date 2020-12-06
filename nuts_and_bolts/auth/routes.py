@@ -1,12 +1,8 @@
-from flask import Blueprint, render_template, redirect, flash
-from flask.globals import request
-from flask.helpers import url_for
-from flask_login.utils import logout_user
+from flask import Blueprint, render_template, redirect, flash, request, url_for
+from flask_login import current_user, login_user, logout_user
 from nuts_and_bolts import bcrypt
-from nuts_and_bolts.auth.forms import LoginForm
 from nuts_and_bolts.models import User
-from flask_login import current_user, login_user
-
+from nuts_and_bolts.auth.forms import LoginForm
 
 auth = Blueprint('auth', __name__)
 

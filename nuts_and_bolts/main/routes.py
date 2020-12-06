@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, redirect, flash, session, abort, request, url_for
-from flask.helpers import url_for
+from flask import Blueprint, render_template, redirect, flash, request, url_for
+from flask_mail import Message
+from nuts_and_bolts.config import Config
 from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product, Testimonial
 from nuts_and_bolts.main.forms import QuestionsForm, TestimonialForm
-from flask_mail import Message
-from nuts_and_bolts.config import Config
 
 main = Blueprint('main', __name__)
 
@@ -33,7 +32,7 @@ Thank you.
 - Nuts and Bolts Staff
 '''
         mail.send(msg)
-        flash(f'Question submitted! Check email for confirmation.', 'success')
+        flash('Question submitted! Check email for confirmation.', 'success')
         return redirect(url_for('main.contact_us'))
     return render_template('contact_us.html', form=form)
 
@@ -46,10 +45,10 @@ def faq():
 @main.route('/search', methods=['GET', 'POST'])
 def search():
     products = []
-    search = request.form['search']
-    if search:
-        products = db.session.query(Product).filter(Product.name.contains(search))
-    return render_template('search.html', search=search, products=products)
+    _search = request.form['search']
+    if _search:
+        products = db.session.query(Product).filter(Product.name.contains(_search))
+    return render_template('search.html', search=_search, products=products)
 
 @main.route('/testimonials', methods=['GET', 'POST'])
 def testimonials():

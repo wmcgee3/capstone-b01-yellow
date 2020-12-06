@@ -43,7 +43,7 @@ def update_inventory(product_id):
             product.sku = int(form.sku.data)
             product.quantity = int(form.quantity.data)
             db.session.commit()
-            flash(f'Entry updated for ' + form.name.data + '!', 'success')
+            flash('Entry updated for ' + form.name.data + '!', 'success')
             return redirect(url_for('products.product_list'))
         else:
             return render_template('update_inventory.html', form=form)

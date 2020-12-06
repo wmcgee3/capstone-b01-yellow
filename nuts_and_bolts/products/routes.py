@@ -8,8 +8,8 @@ products = Blueprint('products', __name__)
 
 @products.route('/products/all')
 def product_list():
-    products = db.session.query(Product).order_by(Product.sku)
-    return render_template('product_list.html', products=products)
+    _products = db.session.query(Product).order_by(Product.sku)
+    return render_template('product_list.html', products=_products)
 
 
 @products.route('/product/<product_sku>', methods=['GET', 'POST'])
