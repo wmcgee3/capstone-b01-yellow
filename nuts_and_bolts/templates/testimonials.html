@@ -3,50 +3,71 @@
 <div class="my-5">
     <h1 class="text-center">Customer Testimonials</h1>
 </div>
-{% if testimonial_list %}
 {% for testimonial in testimonial_list %}
+{% if testimonial.visibility %}
 <article class="media rounded content-section my-2">
     <div class="media-body">
         <h2 class="article-title">{{ testimonial.name | title }}</h2>
         <p class="article-content text-wrap-word-break">{{ testimonial.text }}</p>
+        {% if current_user.is_admin %}
+        <div>
+            <a href="{{ url_for('main.toggle_testimonial_visibility', testimonial_id=testimonial.id) }}"
+                class="btn btn-primary">Make Hidden</a>
+        </div>
+        {% endif %}
     </div>
 </article>
-{% endfor %}
-{% else %}
-    <h2 class="text-center">Uh-oh, it looks like there aren't any testimonials to display. Why not add one?</h2>
 {% endif %}
-<div class="content-section col-md-8 center">
+{% endfor %}
+<div class="content-section col-md-8 center my-5">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <fieldset class = "form-group">
+        <fieldset class="form-group">
             <div class="form-group">{{ form.name.label(class="form-control-label")}}
                 {% if form.name.errors %}
                 {{ form.name(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.name.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
                 {% else %}
-                    {{ form.name(class="form-control form-control-lg") }}
+                {{ form.name(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
 
             <div class="form-group">{{ form.text.label(class="form-control-label")}}
                 {% if form.text.errors %}
                 {{ form.text(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.text.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
+                <div class="invalid-feedback">
+                    {% for error in form.text.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
                 {% else %}
-                    {{ form.text(class="form-control form-control-lg", rows="5") }}
+                {{ form.text(class="form-control form-control-lg", rows="5") }}
                 {% endif %}
             </div>
             <div class="text-center">{{ form.submit }}</div>
         </fieldset>
     </form>
 </div>
+
+{% for testimonial in testimonial_list %}
+{% if current_user.is_admin and not testimonial.visibility %}
+<article class="media rounded content-section my-2">
+    <div class="media-body">
+        <h2 class="article-title">{{ testimonial.name | title }}</h2>
+        <p class="article-content text-wrap-word-break">{{ testimonial.text }}</p>
+        {% if current_user.is_admin %}
+        <div>
+            <a href="{{ url_for('main.toggle_testimonial_visibility', testimonial_id=testimonial.id) }}"
+                class="btn btn-primary">Make Visible</a>
+        </div>
+        {% endif %}
+    </div>
+</article>
+{% endif %}
+{% endfor %}
 
 {% endblock content %}

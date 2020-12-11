@@ -56,3 +56,4 @@ class Testimonial(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     text = db.Column(db.Text, nullable=False)
+    visibility = db.Column(db.Boolean, nullable=False, default=False)

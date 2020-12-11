@@ -36,6 +36,7 @@ Thank you.
         return redirect(url_for('main.contact_us'))
     return render_template('contact_us.html', form=form)
 
+
 @main.route('/about_us')
 def about_us():
     return render_template('about_us.html')
@@ -51,8 +52,10 @@ def search():
     products = []
     _search = request.form['search']
     if _search:
-        products = db.session.query(Product).filter(Product.name.contains(_search))
+        products = db.session.query(Product).filter(
+            Product.name.contains(_search))
     return render_template('search.html', search=_search, products=products)
+
 
 @main.route('/testimonials', methods=['GET', 'POST'])
 def testimonials():
@@ -65,7 +68,16 @@ def testimonials():
         )
         db.session.add(new_testimonial)
         db.session.commit()
-        flash(f'Entry created for {form.name.data}!', 'success')
+        flash(f'Your testimonial {form.name.data} has been submitted for review!', 'success')
         return redirect(url_for('main.testimonials'))
     form.submit.label.text = 'Add Testimonial'
     return render_template('testimonials.html', form=form, testimonial_list=testimonial_list)
+
+
+@main.route('/testimonial/<int:testimonial_id>/toggle_visibility')
+def toggle_testimonial_visibility(testimonial_id):
+    testimonial = db.session.query(
+        Testimonial).filter_by(id=testimonial_id).first()
+    testimonial.visibility = not testimonial.visibility
+    db.session.commit()
+    return redirect(url_for('main.testimonials'))

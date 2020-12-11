@@ -5,7 +5,9 @@
         <div class="article-metadata no-overflow">
             {% if product.image_name %}
             <div class="text-center mw-100">
-                <img class="border border-secondary" src="{{ url_for('static', filename='/images/products/' + product.image_name ) }}"{% if product.image_alt_text %} alt="{{ product.image_alt_text }}"{% endif %}>
+                <img class="border border-secondary"
+                    src="{{ url_for('static', filename='/images/products/' + product.image_name ) }}"
+                    {% if product.image_alt_text %} alt="{{ product.image_alt_text }}" {% endif %}>
             </div>
             {% endif %}
             <span class="font-weight-bold">${{ product.price }}</span>
@@ -22,26 +24,26 @@
             <b class="text-danger"> OUT OF STOCK!</b>
             {%- else -%}
             <div class="col-md-2 ml-auto">
-            <form action="" method="POST">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{ form.quantity.label(class="form-control-label") }}
-                    {% if form.quantity.errors %}
-                    {{ form.quantity(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.quantity.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
+                <form action="" method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.quantity.label(class="form-control-label") }}
+                        {% if form.quantity.errors %}
+                        {{ form.quantity(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.quantity.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.quantity(class="form-control form-control-lg") }}
+                        {% endif %}
                     </div>
-                    {% else %}
-                    {{ form.quantity(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.add(class="btn btn-outline-dark w-100") }}
-                </div>
-            </form>
-        </div>
+                    <div class="form-group">
+                        {{ form.add(class="btn btn-outline-dark w-100") }}
+                    </div>
+                </form>
+            </div>
             {%- endif -%}
         </div>
     </div>
