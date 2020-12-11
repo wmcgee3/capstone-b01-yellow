@@ -103,7 +103,7 @@ def clear_cart():
     return redirect(url_for('cart.show_cart'))
 
 
-@cart.route('/cart/remove_item/<id>')
+@cart.route('/cart/remove_item/<_id>')
 def remove_item(_id):
     if _id in session['cart']:
         session['cart'].pop(_id, None)
