@@ -68,7 +68,7 @@ def testimonials():
         )
         db.session.add(new_testimonial)
         db.session.commit()
-        flash(f'Your testimonial {form.name.data} has been submitted for review!', 'success')
+        flash(f'Thank you for your testimonial, {form.name.data}. It has been submitted for review!', 'success')
         return redirect(url_for('main.testimonials'))
     form.submit.label.text = 'Add Testimonial'
     return render_template('testimonials.html', form=form, testimonial_list=testimonial_list)
