@@ -36,6 +36,10 @@ Thank you.
         return redirect(url_for('main.contact_us'))
     return render_template('contact_us.html', form=form)
 
+@main.route('/about_us')
+def about_us():
+    return render_template('about_us.html')
+
 
 @main.route('/faq')
 def faq():

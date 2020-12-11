@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="text-left">
+  <h1 class="contact-1 mb-5">About Us</h1>
+</div>
+
+<div class="media border p-3">
+    <img src="{{ url_for('static', filename = 'logos/logo.png') }}" alt="Nut Logo" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+    <div class="media-body">
+      <h3>Nuts and Bolts <small><i>Est. 2020</i></small></h3>
+      <p>Founder John Crider, whose whereabouts are unknown to the public, was a computer science teacher for most of his career as far as the writer of this segment knows.
+        One day in 2020, however, Crider decided "screw it, hardware store." And thus, Nuts and Bolts was born. Crider focuses his business approach on customer satisfaction,
+        adding many features to his website early on allowing customers leave feedback to the company, such as the <a href="{{ url_for('main.testimonials')}}">Testimonials</a>
+        page. To create this web page, Crider would need the help of roughly 7 college students, all of which needed to complete a capstone project to graduate with an associate's degree.
+        He enlisted the help of Billy McGee, Kyle Boldman, Garrett Nye, David Hill, William Johnoff, Dellali Attipoe and CJ Beachler to create such a website. 
+        Working for twelve weeks, the students produced the website which you view right now, slowly adding features to the site with each passing week. At the end of the 
+        twelve weeks, the site was left as is. Nuts and Bolts continues to prosper to this day as a result of these developments.
+      </p>
+    </div>
+  </div>
+
+{% endblock content %}

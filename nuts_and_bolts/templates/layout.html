@@ -62,6 +62,7 @@
             <div class="spacer-2"></div>
             <div class="navbar-nav">
               <a href="{{ url_for('main.contact_us') }}" class="nav-item nav-link">Contact Us</a>
+              <a href="{{ url_for('main.about_us') }}"  class="nav-item nav-link">About Us</a>
               <a href="{{ url_for('main.faq') }}" class="nav-item nav-link">FAQ</a>
               <a href="{{ url_for('main.testimonials') }}" class="nav-item nav-link">Testimonials</a>
             </div>
@@ -97,6 +98,7 @@
   <footer class="footer bg-dark d-none d-lg-block">
     <div class="container nav-font text-center" id="footer">
       <a class="mx-4" href="{{ url_for('main.contact_us') }}">Contact Us</a>
+      <a class="mx-4" href="{{ url_for('main.about_us') }}">About Us</a>
       <a class="mx-4" href="{{ url_for('main.faq') }}">FAQ</a>
       <a class="mx-4" href="{{ url_for('main.testimonials') }}">Testimonials</a>
       {%- if current_user.is_authenticated -%}
