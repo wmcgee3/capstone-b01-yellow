@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, SubmitField, TextAreaField, HiddenField
 from wtforms.validators import DataRequired, ValidationError
 from nuts_and_bolts.models import Product
@@ -46,6 +47,8 @@ def check_quantity(_, field):
 
 class InventoryForm(FlaskForm):
     id = HiddenField('ID')
+    image_file = FileField('Update Product Image', validators=[FileAllowed(['jpg', 'png'])])
+    image_alt_text = StringField('Image Description')
     name = StringField('Name', validators=[DataRequired(), check_name])
     description = TextAreaField('Description', validators=[DataRequired()])
     price = StringField('Price', validators=[DataRequired(), check_price])
