@@ -1,71 +1,90 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class = "my-5">
+<div class="my-5">
     <h1 class="text-center">Add to Inventory</h1>
 </div>
 <div class="content-section col-md-8 center">
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
-        <fieldset class = "form-group">
+        <div class="form-group">
+            {{ form.image_file.label() }}
+            {{ form.image_file(class="form-control-file") }}
+            {% if form.image_file.errors %}
+                {% for error in form.image_file.errors %}
+                    <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">{{ form.image_alt_text.label(class="form-control-label")}}
+            {% if form.image_alt_text.errors %}
+            {{ form.image_alt_text(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.image_alt_text.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.image_alt_text(class="form-control form-control-lg") }}
+            {% endif %}</div>
+        <fieldset class="form-group">
             <div class="form-group">{{ form.name.label(class="form-control-label")}}
                 {% if form.name.errors %}
-                    {{ form.name(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.name(class="form-control form-control-lg") }}
-                    {% endif %}</div>
-
+                {{ form.name(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}</div>
             <div class="form-group">{{ form.description.label(class="form-control-label")}}
                 {% if form.description.errors %}
-                        {{ form.description(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.description.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.description(class="form-control form-control-lg", rows="5") }}
-                    {% endif %}</div>
+                {{ form.description(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.description(class="form-control form-control-lg", rows="5") }}
+                {% endif %}</div>
 
             <div class="form-group">{{ form.price.label(class="form-control-label")}}
                 {% if form.price.errors %}
-                    {{ form.price(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.price.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.price(class="form-control form-control-lg") }}
-                    {% endif %}</div>
+                {{ form.price(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.price.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.price(class="form-control form-control-lg") }}
+                {% endif %}</div>
 
             <div class="form-group">{{ form.sku.label(class="form-control-label")}}
                 {% if form.sku.errors %}
-                    {{ form.sku(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.sku.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.sku(class="form-control form-control-lg") }}
-                    {% endif %}</div>
+                {{ form.sku(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.sku.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.sku(class="form-control form-control-lg") }}
+                {% endif %}</div>
 
             <div class="form-group">{{ form.quantity.label(class="form-control-label")}}
                 {% if form.quantity.errors %}
-                    {{ form.quantity(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.quantity.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.quantity(class="form-control form-control-lg") }}
-                    {% endif %}</div>
+                {{ form.quantity(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.quantity.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.quantity(class="form-control form-control-lg") }}
+                {% endif %}</div>
             <div class="text-center">{{ form.submit }}</div>
         </fieldset>
     </form>

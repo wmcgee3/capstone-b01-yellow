@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    image_name = db.Column(db.String, unique=True, nullable=True)
+    image_alt_text = db.Column(db.String, nullable=True)
     sku = db.Column(db.Integer, nullable=False, unique=True)
     name = db.Column(db.String, nullable=False, unique=True)
     price = db.Column(db.String, nullable=False)
