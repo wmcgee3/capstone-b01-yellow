@@ -5,7 +5,7 @@
         <div class="article-metadata no-overflow">
             {% if product.image_name %}
             <div class="text-center mw-100">
-                <img class="border border-secondary"
+                <img class="border border-secondary mw-100"
                     src="{{ url_for('static', filename='/images/products/' + product.image_name ) }}"
                     {% if product.image_alt_text %} alt="{{ product.image_alt_text }}" {% endif %}>
             </div>
