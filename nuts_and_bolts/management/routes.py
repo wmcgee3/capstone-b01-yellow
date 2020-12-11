@@ -46,7 +46,13 @@ def update_inventory(product_id):
     if request.method == 'POST':
         if form.validate_on_submit():
             if form.image_file.data:
-                os.remove(os.path.joing(current_app.root_path, 'static/images/products', product.image_file))
+                os.remove(
+                    os.path.join(
+                        current_app.root_path,
+                        'static/images/products',
+                        product.image_file
+                    )
+                )
                 product.image_file = save_image(form.image_file.data)
             product.image_alt_text = form.image_alt_text.data
             product.name = form.name.data
