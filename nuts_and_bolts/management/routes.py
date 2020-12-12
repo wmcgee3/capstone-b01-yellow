@@ -50,10 +50,10 @@ def update_inventory(product_id):
                     os.path.join(
                         current_app.root_path,
                         'static/images/products',
-                        product.image_file
+                        product.image_name
                     )
                 )
-                product.image_file = save_image(form.image_file.data)
+                product.image_name = save_image(form.image_file.data)
             product.image_alt_text = form.image_alt_text.data
             product.name = form.name.data
             product.description = form.description.data

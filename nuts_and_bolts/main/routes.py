@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, redirect, flash, request, url_for
 from flask_mail import Message
+from flask_login import login_required
+from nuts_and_bolts.shared.utils import admin_required
 from nuts_and_bolts.config import Config
 from nuts_and_bolts import db, mail
 from nuts_and_bolts.models import Product, Testimonial
@@ -78,6 +80,8 @@ def testimonials():
 
 
 @main.route('/testimonial/<int:testimonial_id>/toggle_visibility')
+@login_required
+@admin_required
 def toggle_testimonial_visibility(testimonial_id):
     testimonial = db.session.query(
         Testimonial).filter_by(id=testimonial_id).first()
