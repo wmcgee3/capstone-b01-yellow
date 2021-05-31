@@ -28,7 +28,7 @@ def create_app(config_class=Config):
     def initiate_session():         # pylint: disable=unused-variable
         if 'cart' not in session:
             session['cart'] = {}
-        session.permanent = True
+        session.permanent = True    # pylint: disable=assigning-non-slot
 
     db.init_app(app)
     bcrypt.init_app(app)
